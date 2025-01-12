@@ -1,10 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [backendMessage, setBackendMessage] = useState('');
+
+  // Fetch data from the Java backend
+  useEffect(() => {
+    // Fetch data from the Java backend
+    fetch('http://localhost:8080/compute') // Adjust the URL if your backend uses a different port
+      .then((response) => response.json())
+      .then((data) => {
+        setBackendMessage(data.message); // Save the backend message
+      })
+      .catch((error) => {
+        console.error('Error connecting to backend:', error);
+        setBackendMessage('Error connecting to backend.');
+      });
+  }, []); // Empty dependency array ensures this runs only once on component mount
 
   return (
     <>
@@ -17,6 +32,8 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <h2>Message from Backend:</h2>
+      <p>{backendMessage}</p>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
