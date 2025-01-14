@@ -27,6 +27,15 @@ public class App {
         System.out.println("Registering /addToCart endpoint...");
         server.createContext("/addToCart", ProductHandler::handleAddToCart);
 
+        // Register `/checkout` for initiating payments
+        System.out.println("Registering /checkout endpoint...");
+        server.createContext("/checkout", PaymentHandler::handlePayment);
+
+        // Register `/payment/callback` for handling webhooks
+        System.out.println("Registering /payment/callback endpoint...");
+        server.createContext("/payment/callback", PaymentWebhookHandler::handleWebhook);
+
+
 
         
         // Define endpoint `/compute`
