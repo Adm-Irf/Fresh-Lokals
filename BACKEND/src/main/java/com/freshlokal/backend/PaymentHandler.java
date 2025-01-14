@@ -5,7 +5,6 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
 public class PaymentHandler {
     public static void handlePayment(HttpExchange exchange) throws IOException {
