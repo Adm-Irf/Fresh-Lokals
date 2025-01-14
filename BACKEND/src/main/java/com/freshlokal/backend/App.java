@@ -11,10 +11,16 @@ public class App {
         // Create HTTP server listening on port 8080
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
+        // Register endpoints
+        System.out.println("Registering /products endpoint...");
+        server.createContext("/products", ProductHandler::handleGetProducts);
+
+        System.out.println("Registering /addProduct endpoint...");
+        server.createContext("/addProduct", ProductHandler::handleAddProduct);
+
         // Define endpoint `/compute`
         server.createContext("/compute", exchange -> {
             if ("GET".equals(exchange.getRequestMethod())) {
-
                 exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
                 exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, OPTIONS");
                 exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
