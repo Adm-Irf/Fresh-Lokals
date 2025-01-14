@@ -1,0 +1,12 @@
+windows + r + enter
+
+FrontEnd
+cd OneDrive\Desktop\FRESHLOKAL\FRONTEND\vite-project
+npm run dev
+
+BackEnd
+cd C:\Users\Irfan\OneDrive\Desktop\FRESHLOKAL\BACKEND\src\main\java
+javac com/freshlokal/backend/*.java
+java com.freshlokal.backend.App
+
+Aidil Part
