@@ -1,31 +1,20 @@
 package com.freshlokal.backend;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.UUID;
-
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import java.io.IOException;
+import java.io.OutputStream;
 
-public class PaymentHandler {
-    public static void handlePayment(HttpExchange exchange) throws IOException {
+public class PaymentHandler implements HttpHandler {
+
+    // This is the method that should be called by the server
+    @Override
+    public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equals(exchange.getRequestMethod())) {
-            // Simulate total price calculation (you can fetch this from TPriceHandler)
-            double totalPrice = 100.50; // Replace with dynamic calculation
-            String transactionId = UUID.randomUUID().toString();
+            // Example: Process payment and send response
+            String response = "{\"message\": \"Payment created successfully\"}";
 
-            // Simulate payment initiation
-            String paymentUrl = String.format(
-                    "https://mockpaymentgateway.com/pay?transactionId=%s&amount=%.2f",
-                    transactionId, totalPrice
-            );
-
-            // Prepare JSON response
-            String response = String.format(
-                    "{\"transactionId\": \"%s\", \"paymentUrl\": \"%s\", \"totalPrice\": %.2f}",
-                    transactionId, paymentUrl, totalPrice
-            );
-
+            // Set response headers and send the response body
             exchange.getResponseHeaders().add("Content-Type", "application/json");
             exchange.sendResponseHeaders(200, response.getBytes().length);
 
@@ -33,7 +22,8 @@ public class PaymentHandler {
                 os.write(response.getBytes());
             }
         } else {
-            exchange.sendResponseHeaders(405, -1); // Method not allowed
+            // Respond with a 405 if it's not a POST request
+            exchange.sendResponseHeaders(405, -1);
         }
     }
 }
