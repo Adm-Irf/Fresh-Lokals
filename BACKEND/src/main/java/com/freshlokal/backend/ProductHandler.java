@@ -96,5 +96,63 @@ public class ProductHandler {
             exchange.sendResponseHeaders(405, -1); // Method not allowed
         }
     }
+
+    public static void handleAddToCart(HttpExchange exchange) throws IOException {
+        if ("POST".equals(exchange.getRequestMethod())) {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
     
-}
+            // Read the request body
+            InputStream inputStream = exchange.getRequestBody();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String requestBody = reader.readLine(); // Expecting: "productName,quantity"
+    
+            // Parse product name and quantity
+            String[] input = requestBody.split(",", 2);
+            String productName = input[0].trim();
+            int quantity = Integer.parseInt(input[1].trim());
+    
+            // Find the product in Products.csv
+            List<String[]> products = CSVUtils.readCSV();
+            String[] selectedProduct = null;
+            for (String[] product : products) {
+                if (product[1].equalsIgnoreCase(productName)) {
+                    selectedProduct = product;
+                    break;
+                }
+            }
+    
+            if (selectedProduct != null) {
+                // Append product to User1cart.csv
+                String[] cartEntry = {
+                    selectedProduct[0], // Category
+                    selectedProduct[1], // Name
+                    selectedProduct[2], // Price per unit
+                    selectedProduct[3], // Description
+                    String.valueOf(quantity) // Quantity
+                };
+                CSVUtils.appendToCart(cartEntry);
+    
+                // Send success response
+                String response = "{\"message\": \"Item added to cart successfully!\"}";
+                exchange.sendResponseHeaders(200, response.getBytes().length);
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(response.getBytes());
+                }
+            } else {
+                // Product not found
+                String response = "{\"message\": \"Product not found!\"}";
+                exchange.sendResponseHeaders(404, response.getBytes().length);
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(response.getBytes());
+                }
+            }
+        } else {
+            exchange.sendResponseHeaders(405, -1); // Method not allowed
+        }
+    }
+    
+
+ }
+
+    

@@ -54,6 +54,17 @@ public class CSVUtils {
             e.printStackTrace();
         }
     }
+    // New method specifically for User1cart.csv
+    public static void appendToCart(String[] newRow) {
+        String filePath = "C:\\Users\\Irfan\\OneDrive\\Desktop\\FRESHLOKAL\\BACKEND\\Database\\User1cart.csv";
+        try (FileWriter fw = new FileWriter(filePath, true);
+            BufferedWriter bw = new BufferedWriter(fw)) {
+            bw.write(String.join(",", newRow));
+            bw.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Method to convert CSV data to JSON format
     public static String convertToJson(List<String[]> products) {
@@ -102,6 +113,5 @@ public class CSVUtils {
         }
     
         return productFound; // Return true if the product was found and deleted
-    }
-    
+    }   
 }

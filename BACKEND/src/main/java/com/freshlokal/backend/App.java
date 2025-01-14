@@ -21,6 +21,13 @@ public class App {
         // Register /deleteProduct endpoint
         System.out.println("Registering /deleteProduct endpoint...");
         server.createContext("/deleteProduct", ProductHandler::handleDeleteProduct);
+
+        server.createContext("/totalPrice", new TPriceHandler());
+
+        System.out.println("Registering /addToCart endpoint...");
+        server.createContext("/addToCart", ProductHandler::handleAddToCart);
+
+
         
         // Define endpoint `/compute`
         server.createContext("/compute", exchange -> {
