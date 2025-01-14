@@ -18,6 +18,10 @@ public class App {
         System.out.println("Registering /addProduct endpoint...");
         server.createContext("/addProduct", ProductHandler::handleAddProduct);
 
+        // Register /deleteProduct endpoint
+        System.out.println("Registering /deleteProduct endpoint...");
+        server.createContext("/deleteProduct", ProductHandler::handleDeleteProduct);
+        
         // Define endpoint `/compute`
         server.createContext("/compute", exchange -> {
             if ("GET".equals(exchange.getRequestMethod())) {

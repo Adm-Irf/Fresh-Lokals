@@ -18,7 +18,6 @@ public class ProductHandler {
         // Endpoint to add a product
         server.createContext("/addProduct", ProductHandler::handleAddProduct);
         
-        System.out.println("Registering /deleteProduct endpoint...");
         server.createContext("/deleteProduct", ProductHandler::handleDeleteProduct);
     }
 
