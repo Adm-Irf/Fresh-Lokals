@@ -32,12 +32,9 @@ public class App {
         server.createContext("/checkout", PaymentHandler::handlePayment);
 
         // Register `/payment/callback` for handling webhooks
-        System.out.println("Registering /payment/callback endpoint...");
-        server.createContext("/payment/callback", PaymentWebhookHandler::handleWebhook);
+        // System.out.println("Registering /payment/callback endpoint...");
+        // server.createContext("/payment/callback", PaymentWebhookHandler::handleWebhook);
 
-
-
-        
         // Define endpoint `/compute`
         server.createContext("/compute", exchange -> {
             if ("GET".equals(exchange.getRequestMethod())) {
