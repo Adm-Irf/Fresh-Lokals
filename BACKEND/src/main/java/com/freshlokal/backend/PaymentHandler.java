@@ -6,21 +6,21 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class PaymentHandler implements HttpHandler {
+    public PaymentHandler() {
+    }
 
-    @Override
-    public void handle(HttpExchange exchange) throws IOException {
-        if ("POST".equals(exchange.getRequestMethod())) {
-            // Process payment in backend here, e.g., call PayPal API
-            String response = "{\"message\": \"Payment created successfully\"}";
+    public void handle(HttpExchange var1) throws IOException {
+        if ("POST".equals(var1.getRequestMethod())) {
+            String var2 = "{\"message\": \"Payment created successfully\"}";
+            var1.getResponseHeaders().add("Content-Type", "application/json");
+            var1.sendResponseHeaders(200, (long)var2.getBytes().length);
 
-            exchange.getResponseHeaders().add("Content-Type", "application/json");
-            exchange.sendResponseHeaders(200, response.getBytes().length);
-
-            try (OutputStream os = exchange.getResponseBody()) {
-                os.write(response.getBytes());
+            try (OutputStream var3 = var1.getResponseBody()) {
+                var3.write(var2.getBytes());
             }
         } else {
-            exchange.sendResponseHeaders(405, -1); // Method not allowed
+            var1.sendResponseHeaders(405, -1L);
         }
+
     }
 }
