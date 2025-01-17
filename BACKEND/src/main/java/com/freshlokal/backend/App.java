@@ -27,6 +27,7 @@ public class App {
         System.out.println("Registering /addToCart endpoint...");
         server.createContext("/addToCart", ProductHandler::handleAddToCart);
 
+        // Payment Handler For Paypal
         server.createContext("/checkout", new PaymentHandler());
 
 
