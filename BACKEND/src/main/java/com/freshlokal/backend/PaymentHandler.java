@@ -7,14 +7,12 @@ import java.io.OutputStream;
 
 public class PaymentHandler implements HttpHandler {
 
-    // This is the method that should be called by the server
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equals(exchange.getRequestMethod())) {
-            // Example: Process payment and send response
+            // Process payment in backend here, e.g., call PayPal API
             String response = "{\"message\": \"Payment created successfully\"}";
 
-            // Set response headers and send the response body
             exchange.getResponseHeaders().add("Content-Type", "application/json");
             exchange.sendResponseHeaders(200, response.getBytes().length);
 
@@ -22,8 +20,7 @@ public class PaymentHandler implements HttpHandler {
                 os.write(response.getBytes());
             }
         } else {
-            // Respond with a 405 if it's not a POST request
-            exchange.sendResponseHeaders(405, -1);
+            exchange.sendResponseHeaders(405, -1); // Method not allowed
         }
     }
 }

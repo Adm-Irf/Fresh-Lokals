@@ -11,8 +11,9 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 public class TPriceHandler implements HttpHandler {
-    private static final String CART_CSV_PATH = "C:\\Users\\Irfan\\OneDrive\\Desktop\\FRESHLOKAL\\BACKEND\\Database\\User1cart.csv";
+    private static final String CART_CSV_PATH = "C:\\Users\\ASUS\\IdeaProjects\\Fresh-Lokals\\BACKEND\\Database\\User1cart.csv";
 
+    // Handle HTTP requests
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("GET".equals(exchange.getRequestMethod())) {
@@ -23,7 +24,7 @@ public class TPriceHandler implements HttpHandler {
             List<String[]> cartItems = readCartCSV();
             double totalPrice = calculateTotalPrice(cartItems);
 
-            // Prepare JSON response
+            // Ensure the total price is correct before responding
             String response = "{\"totalPrice\": " + totalPrice + "}";
             exchange.sendResponseHeaders(200, response.getBytes().length);
 
@@ -41,8 +42,9 @@ public class TPriceHandler implements HttpHandler {
         try (BufferedReader br = new BufferedReader(new FileReader(CART_CSV_PATH))) {
             String line;
             while ((line = br.readLine()) != null) {
-                cartItems.add(line.split(",", 5)); // Split into 5 fields
+                cartItems.add(line.split(",", 5)); // Split into 5 fields (name, description, price, etc.)
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
