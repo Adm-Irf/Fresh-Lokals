@@ -1,4 +1,4 @@
-package com.freshlokal.backend.com.freshlokal.backend;
+package com.freshlokal.backend;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
