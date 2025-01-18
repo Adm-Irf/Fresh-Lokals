@@ -21,6 +21,7 @@ public class App {
         server.createContext("/admin/deleteUser", new AdminHandler());
         server.createContext("/admin/viewProducts", new AdminHandler());
         server.createContext("/admin/viewUsers", new AdminHandler());
+        server.createContext("/userCart", new CartHandler());
 
         server.createContext("/login", new AuthHandler());
         server.createContext("/signup", new SignupHandler());
@@ -56,11 +57,12 @@ public class App {
                 os.write(response.getBytes());
             }
         });
+        server.createContext("/itemTotalPrice", ProductHandler::handleGetItemTotalPrice);
 
         // Register endpoints
         System.out.println("Registering /products endpoint...");
         server.createContext("/products", ProductHandler::handleGetProducts);
-
+        server.createContext("/deleteFromCart", ProductHandler::handleDeleteFromCart);
         server.createContext("/totalPrice", new TPriceHandler());
 
         System.out.println("Registering /addToCart endpoint...");
@@ -81,28 +83,6 @@ public class App {
                 exchange.sendResponseHeaders(404, -1);
             }
         });     
-
-        // Define endpoint `/compute`
-        server.createContext("/compute", exchange -> {
-            if ("GET".equals(exchange.getRequestMethod())) {
-                exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-                exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, OPTIONS");
-                exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
-
-                String response = "{\"message\": \"Hello from Maven-based backend!\", \"result\": " + (2 + 2) + "}";
-
-                // Add response headers
-                exchange.getResponseHeaders().add("Content-Type", "application/json");
-                exchange.sendResponseHeaders(200, response.getBytes().length);
-
-                // Send response
-                try (OutputStream os = exchange.getResponseBody()) {
-                    os.write(response.getBytes());
-                }
-            } else {
-                exchange.sendResponseHeaders(405, -1); // Method not allowed
-            }
-        });
 
         // Start the server
         server.setExecutor(null); // Default executor

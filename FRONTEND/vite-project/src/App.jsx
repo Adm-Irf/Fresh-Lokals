@@ -8,6 +8,8 @@ import Farmer from "./Farmer";
 import Login from "./Login"; 
 import Footer from "./components/Footer";
 import Shop from "./Shop";
+import CartPage from "./CartPage";  // Ensure this import is correct
+
 
 function App() {
     return (
@@ -20,6 +22,7 @@ function App() {
                     <Route path="/farmer" element={<Farmer />} />
                     <Route path="/Shop" element={<Shop />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/cart" element={<CartPage/>} />
                 </Routes>
                 <Footer />
             </div>

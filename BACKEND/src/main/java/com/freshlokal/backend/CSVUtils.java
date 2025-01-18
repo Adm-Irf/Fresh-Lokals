@@ -41,20 +41,28 @@ public class CSVUtils {
         File file = new File(userCartFile);
     
         if (!file.exists()) {
-            System.out.println("Cart file does not exist: " + userCartFile);
+            System.out.println("❌ Cart file does not exist: " + userCartFile);
             return cartItems;
         }
     
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                cartItems.add(line.split(",", 5)); // Split into 5 fields
+                System.out.println("🔍 Raw Cart Line: " + line); // Debugging
+                String[] values = line.split(",", 6); // Ensure split into 6 fields
+                if (values.length == 6) {
+                    cartItems.add(values);
+                } else {
+                    System.out.println("❌ Skipping invalid line: " + line);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return cartItems;
-    } 
+    }
+    
+    
 
     public static void checkUsersFile() {
         File file = new File(USERS_CSV_PATH);
@@ -245,24 +253,34 @@ public class CSVUtils {
     
 
     // Method to convert CSV data to JSON format
-    public static String convertToJson(List<String[]> products) {
+    public static String convertToJson(List<String[]> cartItems) {
         StringBuilder json = new StringBuilder("[");
-        for (int i = 0; i < products.size(); i++) {
-            String[] product = products.get(i);
+        for (int i = 0; i < cartItems.size(); i++) {
+            String[] item = cartItems.get(i);
+            if (item.length < 6) {
+                System.out.println("❌ Skipping invalid cart item: " + String.join(",", item));
+                continue; // Skip if incomplete
+            }
+    
             json.append("{")
-                .append("\"category\": \"").append(product[0]).append("\",")
-                .append("\"name\": \"").append(product[1]).append("\",")
-                .append("\"price\": \"").append(product[2]).append("\",")
-                .append("\"description\": \"").append(product[3]).append("\",")
-                .append("\"image\": \"").append(product.length > 4 ? product[4] : "/images/default.png").append("\"")
+                .append("\"category\": \"").append(item[0]).append("\",")
+                .append("\"name\": \"").append(item[1]).append("\",")
+                .append("\"price\": \"").append(item[2]).append("\",")
+                .append("\"description\": \"").append(item[3]).append("\",")
+                .append("\"image\": \"").append(item[4]).append("\",")
+                .append("\"quantity\": \"").append(item[5]).append("\"")
                 .append("}");
-            if (i < products.size() - 1) {
+    
+            if (i < cartItems.size() - 1) {
                 json.append(",");
             }
         }
         json.append("]");
+        System.out.println("✅ JSON Response: " + json);
         return json.toString();
     }
+    
+    
     
 
     public static boolean deleteFromCSV(String productName) {
@@ -412,4 +430,84 @@ public class CSVUtils {
         json.append("]");
         return json.toString();
     }
+
+    public static boolean deleteFromCart(String userCartFile, String productName) {
+        File file = new File(userCartFile);
+        if (!file.exists()) {
+            System.out.println("Cart file does not exist: " + userCartFile);
+            return false;
+        }
+    
+        List<String[]> cartItems = readCartCSV(userCartFile);
+        boolean itemFound = false;
+    
+        List<String[]> updatedCart = new ArrayList<>();
+        for (String[] item : cartItems) {
+            if (!item[1].equalsIgnoreCase(productName)) {
+                updatedCart.add(item);
+            } else {
+                itemFound = true; // Found and removed the item
+            }
+        }
+    
+        if (itemFound) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+                for (String[] item : updatedCart) {
+                    bw.write(String.join(",", item));
+                    bw.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    
+        return itemFound;
+    }
+
+    public static double calculateItemTotalPrice(String userCartFile, String productName) {
+        List<String[]> cartItems = readCartCSV(userCartFile);
+        
+        for (String[] item : cartItems) {
+            if (item[1].equalsIgnoreCase(productName)) { // Check if product name matches
+                try {
+                    double pricePerUnit = Double.parseDouble(item[2]); // Price
+                    int quantity = Integer.parseInt(item[4]); // Quantity
+                    return pricePerUnit * quantity; // Total price for this item
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid number format for: " + productName);
+                    return -1; // Indicate error
+                }
+            }
+        }
+    
+        return -1; // Product not found
+    }
+    
+    // ✅ Convert product list to JSON for the Shop page
+    public static String convertProductsToJson(List<String[]> products) {
+        StringBuilder json = new StringBuilder("[");
+        for (int i = 0; i < products.size(); i++) {
+            String[] product = products.get(i);
+            
+            if (product.length < 5) {
+                System.out.println("❌ Error: Product missing fields!");
+                continue; // Skip if incomplete
+            }
+    
+            json.append("{")
+                .append("\"category\": \"").append(product[0]).append("\",")
+                .append("\"name\": \"").append(product[1]).append("\",")
+                .append("\"price\": \"").append(product[2]).append("\",")
+                .append("\"description\": \"").append(product[3]).append("\",")
+                .append("\"image\": \"").append(product[4]).append("\"")
+                .append("}");
+    
+            if (i < products.size() - 1) {
+                json.append(",");
+            }
+        }
+        json.append("]");
+        return json.toString();
+    }
+       
 }
