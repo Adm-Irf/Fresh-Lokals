@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./styles/Login.css"
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState(""); // Changed to username
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -18,15 +18,15 @@ const Login = () => {
                 headers: {
                     "Content-Type": "text/plain",
                 },
-                body: `${email},${password}`, // Sending raw text as expected by Java backend
+                body: `${username},${password}`, // Sending raw text as expected by Java backend
             });
 
             const data = await response.json();
 
             if (response.ok) {
                 alert(data.message);
-                localStorage.setItem("user", email); // Store login state
-                navigate("/dashboard"); // Redirect to dashboard
+                localStorage.setItem("currentUser", username); // Store login state
+                navigate("/shop"); // Redirect to dashboard
             } else {
                 setError(data.message);
             }
@@ -41,11 +41,11 @@ const Login = () => {
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleLogin}>
                 <div className="input-group">
-                    <label>Email</label>
+                    <label>Username</label>
                     <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </div>

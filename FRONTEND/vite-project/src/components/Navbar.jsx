@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";  // ✅ Keep React Router for internal links
 import "../styles/Navbar.css";
-import cartIcon from "../assets/images/cart.png"; 
 
 const Navbar = () => {
     return (
@@ -11,7 +10,7 @@ const Navbar = () => {
             </div>
             <div className="right">
                 <Link to="/">Home</Link>
-                <Link to="/shop">Shop</Link>
+                <Link to="/Shop">Shop</Link>
                 <Link to="/farmer">Farmer</Link>
                 <Link to="/about">About</Link>  
 

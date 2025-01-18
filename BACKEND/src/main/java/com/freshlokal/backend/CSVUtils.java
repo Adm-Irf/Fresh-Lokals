@@ -254,7 +254,7 @@ public class CSVUtils {
                 .append("\"name\": \"").append(product[1]).append("\",")
                 .append("\"price\": \"").append(product[2]).append("\",")
                 .append("\"description\": \"").append(product[3]).append("\",")
-                .append("\"image\": \"").append(product.length > 4 ? product[4] : "").append("\"")
+                .append("\"image\": \"").append(product.length > 4 ? product[4] : "/images/default.png").append("\"")
                 .append("}");
             if (i < products.size() - 1) {
                 json.append(",");
@@ -263,6 +263,7 @@ public class CSVUtils {
         json.append("]");
         return json.toString();
     }
+    
 
     public static boolean deleteFromCSV(String productName) {
         File file = new File(CSV_FILE_PATH);
