@@ -18,8 +18,8 @@ const Navbar = ({ user }) => {
             <div className="right">
                 <Link to="/">Home</Link>
                 <Link to="/shop">Shop</Link>
-                <Link to="/farmer">About Farmer</Link>
-                <Link to="/about">About Us</Link>
+                <Link to="/farmer">Farmer</Link>
+                <Link to="/about">About</Link>
             </div>
         </nav>
     );
