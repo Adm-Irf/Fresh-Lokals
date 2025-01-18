@@ -1,62 +1,180 @@
+/* General Styles */
 .landing-page {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .hero {
-    background: none; /* Removes the Vite logo */
-    background-color: #ffffff; /* Set a clean white background */
-    color: black;
-    padding: 100px 20px;
-    text-align: center;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
-  
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
+
+/* Hero Section with Background Image */
+.hero {
+  position: relative; /* Ensures overlay and text position correctly */
+  background-image: url("../assets/images/local.jpg"); /* Adjust path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 120px 20px; /* Slightly larger padding for better spacing */
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Darker Overlay for Better Readability */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Darker overlay (0.6 = stronger) */
+  border-radius: 8px;
+  z-index: 1;
+}
+
+/* Ensure text appears above the overlay */
+.hero h1, .hero p {
+  position: relative;
+  z-index: 2;
+  color: white; /* Keep text white for high contrast */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds a shadow for better contrast */
+}
+
+/* Adjust heading and paragraph text */
+.hero h1 {
+  font-size: 3.2rem; /* Increase font size slightly */
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.4rem; /* Increase paragraph size */
+  color: #f8f8f8; /* Slightly lighter for visibility */
+}
+
+
+/* CTA Button */
+.cta-button {
+  background-color: #ff6600;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cta-button:hover {
+  background-color: #cc5500;
+}
+
+/* Sections */
+.categories, .recently-added, .testimonials {
+  margin: 40px 0;
+}
+
+/* Grid Layout for Categories */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+/* Category & Product Cards */
+.category-card, .product-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.category-card:hover, .product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Fix for Recently Added Items (2x2 Grid Layout) */
+.recently-added {
+  text-align: center;
+}
+
+.recently-added .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+  gap: 20px; /* Adds spacing */
+  max-width: 500px; /* Controls width for proper layout */
+  margin: 0 auto;
+  justify-content: center;
+}
+
+/* Responsive Layout (Stack Items on Smaller Screens) */
+@media (max-width: 600px) {
+  .recently-added .grid {
+    grid-template-columns: 1fr; /* 1 item per row on small screens */
   }
-  
-  .hero p {
-    font-size: 1.2rem;
-  }
-  
-  .cta-button {
-    background-color: #ff6600;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2rem;
-  }
-  
-  .cta-button:hover {
-    background-color: #cc5500;
-  }
-  
-  .categories, .best-sellers, .testimonials {
-    margin: 40px 0;
-  }
-  
-  .category-list, .product-list {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .category-card, .product-card {
-    background: #f5f5f5;
-    padding: 20px;
-    border-radius: 10px;
-    width: 150px;
-    text-align: center;
-  }
-  
-  .footer {
-    background: #222;
-    color: white;
-    padding: 20px;
-    margin-top: 40px;
-  }
-  
+}
+
+/* Grocery Promotions Section */
+.promotions {
+  text-align: center;
+}
+
+.promotions-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.promotion-card {
+  position: relative;
+  width: 320px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promotion-card .overlay {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.promotion-card h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.promotion-card p {
+  font-size: 1rem;
+  color: #ffcc00;
+}
+

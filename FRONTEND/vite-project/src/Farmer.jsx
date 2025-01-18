@@ -1,30 +1,35 @@
 import React from "react";
 import "./styles/Farmer.css";
+import Sabahimg from "./assets/images/sabah.webp"
+import Perlisimg from "./assets/images/perlis.jpg"
+import Riceimg from "./assets/images/padi.webp"
+import Cameronimg from "./assets/images/cameron.jpg"
+import Johorimg from "./assets/images/johor.webp"
 
 const farmers = [
   {
     name: "Kampung Fresh Farm",
-    image: "https://picsum.photos/seed/farm1/300/200", // Placeholder
+    image: Perlisimg,
     description: "An organic farm in Perlis known for its pesticide-free fresh vegetables and herbs.",
   },
   {
     name: "Sabah Dairy Farm",
-    image: "https://picsum.photos/seed/farm2/300/200", // Placeholder
+    image: Sabahimg, 
     description: "A dairy farm in Kundasang, Sabah, supplying fresh milk from naturally raised cows.",
   },
   {
     name: "Langkawi Rice Fields",
-    image: "https://picsum.photos/seed/farm3/300/200", // Placeholder
+    image: Riceimg,
     description: "A top producer of fragrant local rice grown in the traditional paddy fields of Langkawi.",
   },
   {
     name: "Cameron Tropical Fruits",
-    image: "https://picsum.photos/seed/farm4/300/200", // Placeholder
+    image: Cameronimg, 
     description: "Supplying fresh strawberries, passion fruit, and bananas from Cameron Highlands.",
   },
   {
     name: "Johor Stingless Bee Honey",
-    image: "https://picsum.photos/seed/farm5/300/200", // Placeholder
+    image: Johorimg,
     description: "Pure stingless bee honey sustainably harvested in Johor, packed with health benefits.",
   },
 ];

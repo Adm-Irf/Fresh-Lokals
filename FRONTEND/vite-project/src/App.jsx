@@ -11,6 +11,8 @@ import Shop from "./Shop";
 import CartPage from "./CartPage";  // Ensure this import is correct
 
 
+
+
 function App() {
     return (
         <Router>
