@@ -3,29 +3,32 @@
   line-height: 1.5;
   font-weight: 400;
 
-  /* Remove background-color to prevent conflicts */
-  /* background-color: #242424; */
-
+  background-color: #ffffff;
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Keep this */
-body {
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;  
   margin: 0;
-  padding-top: 70px;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
 }
 
-/* Remove this if it's causing unwanted dark mode */
+body {
+  padding-top: 70px; 
+  display: block;  
+  max-width: 100vw;  
+  box-sizing: border-box; 
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff; /* Remove this if it's unwanted */
+    background-color: #ffffff;
   }
 }

@@ -6,9 +6,11 @@ import LandingPage from "./LandingPage";
 
 function App() {
     return (
-        <Router>  {/* ✅ Wrap the entire app in Router */}
+        <Router>
             <Navbar />
-            <LandingPage />
+            <div className="app-container"> 
+                <LandingPage />
+            </div>
         </Router>
     );
 }
