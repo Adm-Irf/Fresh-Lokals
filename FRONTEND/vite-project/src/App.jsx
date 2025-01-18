@@ -1,15 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom"; // ✅ Import Router
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";  
 import "./styles/App.css";
 import Navbar from "./components/Navbar";
 import LandingPage from "./LandingPage";
+import About from "./About";
+import Farmer from "./Farmer";
+import Login from "./Login"; 
+import Footer from "./components/Footer";
 
 function App() {
     return (
         <Router>
             <Navbar />
-            <div className="app-container"> 
-                <LandingPage />
+            <div className="app-container">
+                <Routes>  {/* ✅ Wrap with Routes */}
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/farmer" element={<Farmer />} />
+                    <Route path="/login" element={<Login />} />
+                </Routes>
+                <Footer />
             </div>
         </Router>
     );
