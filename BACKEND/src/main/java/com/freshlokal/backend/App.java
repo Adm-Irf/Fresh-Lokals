@@ -8,19 +8,56 @@ import com.sun.net.httpserver.HttpServer;
 
 public class App {
     public static void main(String[] args) throws IOException {
+        CSVUtils.checkUsersFile();
+        CSVUtils.testReadUsersFile();
         // Create HTTP server listening on port 8080
+    
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+        server.createContext("/admin/updateProduct", new AdminHandler());
+        server.createContext("/admin/addProduct", new AdminHandler());
+        server.createContext("/admin/deleteProduct", new AdminHandler());
+        server.createContext("/admin/deleteUser", new AdminHandler());
+        server.createContext("/admin/viewProducts", new AdminHandler());
+        server.createContext("/admin/viewUsers", new AdminHandler());
+
+        server.createContext("/login", new AuthHandler());
+        server.createContext("/signup", new SignupHandler());
+        server.createContext("/currentUser", exchange -> {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+        
+            String currentUser = CSVUtils.getCurrentUser();
+            String response;
+            if (currentUser == null || currentUser.isEmpty()) {
+                response = "{\"currentUser\": null}";
+                exchange.sendResponseHeaders(404, response.getBytes().length);
+            } else {
+                response = "{\"currentUser\": \"" + currentUser + "\"}";
+                exchange.sendResponseHeaders(200, response.getBytes().length);
+            }
+        
+            try (OutputStream os = exchange.getResponseBody()) {
+                os.write(response.getBytes());
+            }
+        });
+
+        server.createContext("/logout", exchange -> {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+        
+            CSVUtils.logoutUser(); // Call the function to clear user session
+        
+            String response = "{\"message\": \"Logged out successfully\"}";
+            exchange.sendResponseHeaders(200, response.getBytes().length);
+        
+            try (OutputStream os = exchange.getResponseBody()) {
+                os.write(response.getBytes());
+            }
+        });
 
         // Register endpoints
         System.out.println("Registering /products endpoint...");
         server.createContext("/products", ProductHandler::handleGetProducts);
-
-        System.out.println("Registering /addProduct endpoint...");
-        server.createContext("/addProduct", ProductHandler::handleAddProduct);
-
-        // Register /deleteProduct endpoint
-        System.out.println("Registering /deleteProduct endpoint...");
-        server.createContext("/deleteProduct", ProductHandler::handleDeleteProduct);
 
         server.createContext("/totalPrice", new TPriceHandler());
 
