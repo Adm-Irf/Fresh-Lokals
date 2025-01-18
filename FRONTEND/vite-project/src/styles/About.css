@@ -1,0 +1,28 @@
+.about-page {
+    text-align: center;
+    padding: 50px;
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: auto;
+}
+
+.mission, .offerings, .contact {
+    margin-top: 30px;
+}
+
+.offerings ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.offerings li {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.contact iframe {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    margin-top: 20px;
+}
