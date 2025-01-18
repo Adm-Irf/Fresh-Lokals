@@ -197,19 +197,20 @@ public class CSVUtils {
     // Method to read CSV file
     public static List<String[]> readCSV() {
         List<String[]> products = new ArrayList<>();
-        File file = new File(CSV_FILE_PATH);
-        System.out.println("Attempting to read file: " + file.getAbsolutePath());
-
-        try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Database/Products.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                products.add(line.split(",", 4)); // Split into 4 fields: category, name, price, description
+                String[] values = line.split(",", 5); // Ensure 5 fields (category, name, price, description, image)
+                if (values.length == 5) {
+                    products.add(values);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return products;
     }
+    
 
     // Method to append a new row to the CSV file
     public static void appendToCSV(String[] newRow) {
@@ -252,7 +253,8 @@ public class CSVUtils {
                 .append("\"category\": \"").append(product[0]).append("\",")
                 .append("\"name\": \"").append(product[1]).append("\",")
                 .append("\"price\": \"").append(product[2]).append("\",")
-                .append("\"description\": \"").append(product[3]).append("\"")
+                .append("\"description\": \"").append(product[3]).append("\",")
+                .append("\"image\": \"").append(product.length > 4 ? product[4] : "").append("\"")
                 .append("}");
             if (i < products.size() - 1) {
                 json.append(",");

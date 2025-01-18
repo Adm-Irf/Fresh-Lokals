@@ -1,8 +1,8 @@
-Dairy,Fresh Milk,10,Organic milk with extra vitamins.
-Meat,Fresh Chicken Breast,15,Chicken breast is a lean cut of meat that is versatile and high in protein. It is widely used in various dishes including grilling frying and baking.
-Seafood,Fresh Salmon,25,Salmon is a rich flavorful fish that is an excellent source of omega-3 fatty acids. It is commonly grilled baked or enjoyed raw in sushi and sashimi.
-Bakery,Fresh Baguette,4,A baguette is a long crusty French bread that is soft on the inside. It is perfect for sandwiches or served with soups and stews.
-Frozen,Frozen Mixed Vegetables,10,Frozen mixed vegetables are a convenient blend of vegetables like carrots peas and corn. They are easy to prepare and great for stir-fries soups and side dishes.
-Pantry,Cooking Oil,12,Cooking oil is a kitchen essential used for frying sautéing and baking. Common types include sunflower oil vegetable oil and olive oil.
-Snacks,Potato Chips,3,Potato chips are thinly sliced fried potatoes that are crispy and salty. They are a popular snack enjoyed by people of all ages.
-Fruit,Fresh Orange,5,Fresh round Orange
+Dairy,Fresh Milk,10,Organic milk with extra vitamins.,images/FreshMilk.jpeg
+Meat,Fresh Chicken Breast,15,Chicken breast is a lean cut of meat.,images/FreshChickenBreast.jpg
+Seafood,Fresh Salmon,25,Salmon is a rich flavorful fish.,images/FreshSalmon.jpeg
+Bakery,Fresh Baguette,4,A baguette is a long crusty French bread .,images/FreshBaguette.jpeg
+Frozen,Frozen Mixed Vegetables,10,Frozen mixed vegetables.,images/FrozenMixedVegetables.jpeg
+Pantry,Cooking Oil,12,Cooking oil is a kitchen essential.,images/CookingOil.png
+Snacks,Potato Chips,3,Potato chips are thinly sliced fried potatoes.,images/PotatoChips.jpeg
+Fruit,Fresh Orange,5,Fresh round Orange.,images/FreshOrange.jpeg

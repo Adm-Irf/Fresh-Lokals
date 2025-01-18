@@ -1,8 +1,10 @@
 package com.freshlokal.backend;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
 
 import com.sun.net.httpserver.HttpServer;
 
@@ -66,6 +68,19 @@ public class App {
 
         server.createContext("/checkout", new PaymentHandler());
 
+        // Serve static images
+        server.createContext("/images", exchange -> {
+            String filePath = "Database" + exchange.getRequestURI().getPath(); // Load from Database/images/
+            File file = new File(filePath);
+            if (file.exists()) {
+                exchange.sendResponseHeaders(200, file.length());
+                OutputStream os = exchange.getResponseBody();
+                Files.copy(file.toPath(), os);
+                os.close();
+            } else {
+                exchange.sendResponseHeaders(404, -1);
+            }
+        });     
 
         // Define endpoint `/compute`
         server.createContext("/compute", exchange -> {
