@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CSVUtils {
-    private static final String CSV_FILE_PATH = "C:\\Users\\Irfan\\OneDrive\\Desktop\\FRESHLOKAL\\BACKEND\\Database\\Products.csv";
-    private static final String USERS_CSV_PATH = "C:\\Users\\Irfan\\OneDrive\\Desktop\\FRESHLOKAL\\BACKEND\\Database\\Users.csv";
+    private static final String CSV_FILE_PATH = "Database/Products.csv";
+    private static final String USERS_CSV_PATH = "Database/Users.csv";
 
     public static boolean isAdmin() {
         String currentUser = getCurrentUser();
@@ -380,7 +380,8 @@ public class CSVUtils {
         }
     
         if (productFound) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("Database/Products.csv"))) {
+            // Overwrite existing Products.csv instead of creating a new one
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("Database/Products.csv", false))) { // false to overwrite
                 for (String[] product : products) {
                     bw.write(String.join(",", product));
                     bw.newLine();
