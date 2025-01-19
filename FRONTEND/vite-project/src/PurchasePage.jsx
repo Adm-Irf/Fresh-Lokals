@@ -43,7 +43,6 @@ const PurchasesPage = () => {
                             <th>Category</th>
                             <th>Product</th>
                             <th>Price (RM)</th>
-                            <th>Quantity</th>
                         </tr>
                     </thead>
                     <tbody>

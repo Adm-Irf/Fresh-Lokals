@@ -43,9 +43,26 @@ public class PurchaseHandler implements HttpHandler {
                 return;
             }
 
+            // ✅ Append all cart items with the correct quantity field
             for (String[] item : cartItems) {
-                String[] purchaseEntry = { transactionId, item[0], item[1], item[2], item[3], item[4], item[5] };
-                CSVUtils.appendToPurchaseCSV(purchaseEntry, "Database/" + currentUser + "_purchase.csv"); // ✅ Use appendToCSV instead of appendToPurchaseCSV
+                if (item.length < 6) { 
+                    sendResponse(exchange, 500, "{\"message\": \"Error: Cart data is incomplete!\"}");
+                    return;
+                }
+
+                // ✅ Correct order for CSV storage
+                String[] purchaseEntry = { 
+                    transactionId, // ✅ Transaction ID
+                    item[0],  // ✅ Category
+                    item[1],  // ✅ Product Name
+                    item[2],  // ✅ Price
+                    item[3],  // ✅ Description
+                    item[4],  // ✅ Image
+                    item[5]   // ✅ Quantity (Ensure it's correct)
+                };                
+
+                // ✅ Save purchase to file
+                CSVUtils.appendToPurchaseCSV(purchaseEntry, "Database/" + currentUser + "_purchase.csv");
             }
 
             // ✅ Clear cart after purchase
@@ -65,12 +82,12 @@ public class PurchaseHandler implements HttpHandler {
             List<String[]> purchases = CSVUtils.readCartCSV("Database/" + currentUser + "_purchase.csv");
             
             if (purchases.isEmpty()) {
-                sendResponse(exchange, 200, "{\"message\": \"No purchase history found.\"}");
+                sendResponse(exchange, 200, "[]"); // ✅ Return empty array instead of message
                 return;
             }
 
-            // ✅ Convert to JSON format (Fix method issue)
-            String jsonResponse = new Gson().toJson(purchases); // ✅ Use Gson directly
+            // ✅ Convert to JSON format
+            String jsonResponse = new Gson().toJson(purchases);
 
             sendResponse(exchange, 200, jsonResponse);
 
