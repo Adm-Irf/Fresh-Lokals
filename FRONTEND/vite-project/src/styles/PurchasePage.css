@@ -1,0 +1,20 @@
+.purchases-container {
+    max-width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.purchases-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.purchases-table th, .purchases-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.purchases-table th {
+    background-color: #f4f4f4;
+}
