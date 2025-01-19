@@ -52,7 +52,6 @@ const PurchasesPage = () => {
                                 <td>{purchase[1]}</td> {/* Category */}
                                 <td>{purchase[2]}</td> {/* Product Name */}
                                 <td>RM {purchase[3]}</td> {/* Price */}
-                                <td>{purchase[6]}</td> {/* Quantity */}
                             </tr>
                         ))}
                     </tbody>
