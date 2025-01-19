@@ -35,7 +35,7 @@ const Navbar = () => {
             <div className="left">
                 {username ? (
                     <button className="username-button" onClick={handleLogout}>
-                        {username} ▼
+                        {username} <span className="dropdown-arrow">▼</span>
                     </button>
                 ) : (
                     <Link to="/login" className="signin-button">Sign In</Link>
