@@ -210,30 +210,32 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="admin-dashboard">
-            <h2>Admin Dashboard</h2>
-            <div className="admin-options">
-            <button className={view === "products" ? "active" : ""} onClick={() => setView("products")}>
-                📦 Manage Products
-            </button>
-            <button className={view === "users" ? "active" : ""} onClick={() => { setView("users"); fetchUsers(); }}>
-                👤 View Users
-            </button>
-            <button className="signout-btn" onClick={handleSignOut}>🚪 Sign Out</button> {/* ✅ Add this */}
-        </div>
+        <div className="admin-container">
+            <h2>🛒 Admin Dashboard</h2>
 
+            {/* Admin Navigation Buttons */}
+            <div className="admin-options">
+                <button className={view === "products" ? "active" : ""} onClick={() => setView("products")}>
+                    📦 Manage Products
+                </button>
+                <button className={view === "users" ? "active" : ""} onClick={() => { setView("users"); fetchUsers(); }}>
+                    👤 View Users
+                </button>
+                <button className="signout-btn" onClick={handleSignOut}>🚪 Sign Out</button>
+            </div>
 
             {/* ✅ Product Management View */}
             {view === "products" && (
-                <>
-                    <h3>Product List</h3>
-                    <table>
+                <div className="table-container">
+                    <h3>📋 Product List</h3>
+                    <table className="admin-table">
                         <thead>
                             <tr>
                                 <th>Category</th>
                                 <th>Name</th>
                                 <th>Price (RM)</th>
                                 <th>Description</th>
+                                <th>Image</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -245,68 +247,65 @@ const AdminDashboard = () => {
                                     <td>RM {product.price}</td>
                                     <td>{product.description}</td>
                                     <td>
-                                        <img 
+                                        <img className="product-image" 
                                             src={`http://localhost:8080/${product.image}`} 
                                             alt={product.name} 
-                                            style={{ width: "50px", height: "50px", objectFit: "cover" }} 
-                                            onError={(e) => e.target.style.display = 'none'} // ✅ Hide broken images
+                                            onError={(e) => e.target.style.display = 'none'} 
                                         />
                                     </td>
-                                    <td>
-                                        <button onClick={() => setEditProduct({ ...product, oldName: product.name })}>
+                                    <td className="action-buttons">
+                                        <button className="edit-btn" onClick={() => setEditProduct({ ...product, oldName: product.name })}>
                                             ✏ Edit
                                         </button>
-                                        <button onClick={() => handleDeleteProduct(product.name)}>🗑 Delete</button>
+                                        <button className="delete-btn" onClick={() => handleDeleteProduct(product.name)}>
+                                            🗑 Delete
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
-
                     </table>
 
                     {/* ✅ Add Product */}
-                    <h3>Add Product</h3>
-                        <div className="add-product-form">
-                            <input type="text" placeholder="Category" value={newProduct.category} 
-                                onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })} 
-                            />
-                            <input type="text" placeholder="Name" value={newProduct.name} 
-                                onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} 
-                            />
-                            <input type="number" placeholder="Price" value={newProduct.price} 
-                                onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} 
-                            />
-                            <input type="text" placeholder="Description" value={newProduct.description} 
-                                onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} 
-                            />
-                            
-                            {/* ✅ New Image Upload Input */}
-                            <input type="file" accept="image/*" onChange={(e) => setNewProduct({ ...newProduct, image: e.target.files[0] })} />
+                    <h3>➕ Add Product</h3>
+                    <div className="form-container">
+                        <input type="text" placeholder="Category" value={newProduct.category} 
+                            onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })} 
+                        />
+                        <input type="text" placeholder="Name" value={newProduct.name} 
+                            onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} 
+                        />
+                        <input type="number" placeholder="Price" value={newProduct.price} 
+                            onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} 
+                        />
+                        <input type="text" placeholder="Description" value={newProduct.description} 
+                            onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} 
+                        />
+                        <input type="file" accept="image/*" onChange={(e) => setNewProduct({ ...newProduct, image: e.target.files[0] })} />
 
-                            <button onClick={handleAddProduct}>➕ Add Product</button>
-                        </div>
-
+                        <button className="add-btn" onClick={handleAddProduct}>➕ Add Product</button>
+                    </div>
 
                     {/* ✅ Edit Product */}
                     {editProduct && (
-                        <div className="edit-product-form">
-                            <h3>Edit Product</h3>
+                        <div className="form-container">
+                            <h3>✏ Edit Product</h3>
                             <input type="text" placeholder="Category" value={editProduct.category} onChange={(e) => setEditProduct({ ...editProduct, category: e.target.value })} />
                             <input type="text" placeholder="New Name" value={editProduct.name} onChange={(e) => setEditProduct({ ...editProduct, name: e.target.value })} />
                             <input type="number" placeholder="New Price" value={editProduct.price} onChange={(e) => setEditProduct({ ...editProduct, price: e.target.value })} />
                             <input type="text" placeholder="New Description" value={editProduct.description} onChange={(e) => setEditProduct({ ...editProduct, description: e.target.value })} />
-                            <button onClick={handleUpdateProduct}>✅ Update Product</button>
-                            <button onClick={() => setEditProduct(null)}>❌ Cancel</button>
+                            <button className="update-btn" onClick={handleUpdateProduct}>✅ Update Product</button>
+                            <button className="cancel-btn" onClick={() => setEditProduct(null)}>❌ Cancel</button>
                         </div>
                     )}
-                </>
+                </div>
             )}
 
             {/* ✅ User Management View */}
             {view === "users" && (
-                <>
-                    <h3>User List</h3>
-                    <table>
+                <div className="table-container">
+                    <h3>👥 User List</h3>
+                    <table className="admin-table">
                         <thead>
                             <tr>
                                 <th>Username</th>
@@ -316,18 +315,20 @@ const AdminDashboard = () => {
                         <tbody>
                             {users.map((user, index) => (
                                 <tr key={index}>
-                                    <td>{user.username}</td> {/* ✅ Fixed: Now it correctly displays usernames */}
-                                    <td>
-                                        <button onClick={() => handleDeleteUser(user.username)}>🗑 Delete</button>
+                                    <td>{user.username}</td>
+                                    <td className="action-buttons">
+                                        <button className="delete-btn" onClick={() => handleDeleteUser(user.username)}>
+                                            🗑 Delete
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                </>
+                </div>
             )}
-
         </div>
+
     );
 };
 

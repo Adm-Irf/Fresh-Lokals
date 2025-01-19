@@ -1,4 +1,4 @@
-Meat,Free-Range Chicken,18,Free-range chicken (Ayam Kampung) is known for its rich flavor and firm texture.,images/ayam.webp
+Meat,Free-Range Chicken,18,Free-range chicken (Ayam Kampung) is known for its rich flavor and firm texture.,images/ayam.webp 
 Meat,Beef Tenderloin,45,Beef tenderloin (Daging Batang Pinang) is a premium cut used for rendang and grilling.,images/tenderloin.png
 Meat,Chicken Feet,6,Chicken feet (Kaki Ayam) are commonly used in soups and dim sum.,images/feet.png
 Meat,Chicken Liver,4,Chicken liver (Hati Ayam) is commonly used in curries and stir-fries.,images/hati.webp
@@ -10,7 +10,7 @@ Vegetables,Bird’s Eye Chili,8,Bird’s eye chili (Cili Padi) is a key ingredie
 Vegetables,Vietnamese Coriander,3,Vietnamese coriander (Daun Kesum) is used in laksa and spicy soups.,images/kesum.png
 Vegetables,Long Beans,5,Long beans (Kacang Panjang) are a staple in stir-fried dishes and curries.,images/kacang.png
 Vegetables,Purple Eggplant,4,Purple eggplant (Terung Ungu) is commonly used in sambal terung.,images/terung.png
-Vegetables,Cassava Leaves,3,Cassava leaves (Pucuk Ubi) are cooked in coconut milk or stir-fried.,images/pucuk.png
+Vegetables,Cassava Leaves,2,Cassava leaves (Pucuk Ubi) are cooked in coconut milk or stir-fried.,images/pucuk.png
 Vegetables,Garlic,6,Garlic (Bawang Putih) is a staple ingredient in Malaysian and Asian cuisine.,images/garlic.jpg
 Pantry,Turmeric Powder,3,Turmeric powder (Serbuk Kunyit) enhances the color and flavor of dishes.,images/kunyit.jpg
 Pantry,Tamarind Paste,7,Tamarind paste (Asam Jawa) adds a sour taste to curries and sambal.,images/asamjawa.jpg
@@ -29,4 +29,4 @@ Spices,Black Pepper,5,Black pepper (Lada Hitam) is a key spice in meat dishes an
 Spices,Cardamom,7,Cardamom (Buah Pelaga) is commonly used in biryani and spice blends.,images/pelaga.jpg
 Spices,Star Anise,6,Star anise (Bunga Lawang) adds depth and aroma to curries and soups.,images/lawang.png
 Pantry,Fermented Soybean Paste,7,Fermented soybean paste (Taucu) is commonly used in Chinese-Malay dishes.,images/taucu.jpg
-Spices,Candlenuts,5,Candlenuts (Buah Keras) are used as a thickening agent in curries and stews.,images/keras.webp
+Spices,Candlenuts,3,Candlenuts (Buah Keras) are used as a thickening agent in curries and stews.,images/keras.webp
