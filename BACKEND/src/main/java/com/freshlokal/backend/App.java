@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.file.Files;
 
+import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
 public class App {
@@ -15,12 +16,23 @@ public class App {
         // Create HTTP server listening on port 8080
     
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-        server.createContext("/admin/updateProduct", new AdminHandler());
+        server.createContext("/admin/updateProduct", exchange -> {
+            addCorsHeaders(exchange);
+            new AdminHandler().handle(exchange);
+        });
         server.createContext("/admin/addProduct", new AdminHandler());
         server.createContext("/admin/deleteProduct", new AdminHandler());
         server.createContext("/admin/deleteUser", new AdminHandler());
-        server.createContext("/admin/viewProducts", new AdminHandler());
-        server.createContext("/admin/viewUsers", new AdminHandler());
+        server.createContext("/admin/viewProducts", exchange -> {
+            addCorsHeaders(exchange);
+            new AdminHandler().handle(exchange);
+        });
+        
+        server.createContext("/admin/viewUsers", exchange -> {
+            addCorsHeaders(exchange);
+            new AdminHandler().handle(exchange);
+        });
+        
         server.createContext("/userCart", new CartHandler());
 
         server.createContext("/login", new AuthHandler());
@@ -46,9 +58,15 @@ public class App {
 
         server.createContext("/logout", exchange -> {
             exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-            exchange.getResponseHeaders().add("Content-Type", "application/json");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "POST, OPTIONS");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
         
-            CSVUtils.logoutUser(); // Call the function to clear user session
+            if ("OPTIONS".equals(exchange.getRequestMethod())) {
+                exchange.sendResponseHeaders(204, -1); // Preflight request response
+                return;
+            }
+        
+            CSVUtils.logoutUser(); // ✅ Clears session
         
             String response = "{\"message\": \"Logged out successfully\"}";
             exchange.sendResponseHeaders(200, response.getBytes().length);
@@ -57,6 +75,7 @@ public class App {
                 os.write(response.getBytes());
             }
         });
+        
         server.createContext("/itemTotalPrice", ProductHandler::handleGetItemTotalPrice);
 
         // Register endpoints
@@ -88,5 +107,12 @@ public class App {
         server.setExecutor(null); // Default executor
         server.start();
         System.out.println("Server started at http://localhost:8080");
+    }
+    
+    // ✅ Function to add CORS headers
+    private static void addCorsHeaders(HttpExchange exchange) {
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type, Authorization");
     }
 }

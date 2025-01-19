@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -204,20 +205,27 @@ public class CSVUtils {
 
     // Method to read CSV file
     public static List<String[]> readCSV() {
-        List<String[]> products = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("Database/Products.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",", 5); // Ensure 5 fields (category, name, price, description, image)
-                if (values.length == 5) {
-                    products.add(values);
-                }
+    List<String[]> products = new ArrayList<>();
+    String csvFile = "Database/Products.csv"; // Ensure correct path
+
+    try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+            if (values.length >= 5) { // Ensure correct data structure
+                products.add(values);
+            } else {
+                System.out.println("⚠ Skipping invalid entry: " + Arrays.toString(values));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return products;
+    } catch (IOException e) {
+        System.out.println("❌ Error reading CSV file: " + e.getMessage());
     }
+
+    System.out.println("✅ Finished Reading CSV: " + products.size() + " products loaded.");
+    return products;
+}
+
     
 
     // Method to append a new row to the CSV file
