@@ -1,108 +1,201 @@
+/* Admin Dashboard Container */
 .admin-container {
-    width: 90%;
+    width: 95%;
+    max-width: 1200px;
     margin: 40px auto;
-    padding: 20px;
+    padding: 30px;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
+/* Dashboard Title */
 h2 {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
+    color: #333;
     margin-bottom: 20px;
 }
 
+/* Navigation Buttons */
 .admin-options {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .admin-options button {
-    padding: 12px 18px;
-    background: #ff4d4d;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #4CAF50, #2E8B57);
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 16px;
-    transition: background 0.3s ease-in-out;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
 }
 
 .admin-options button:hover {
-    background: #cc0000;
+    background: linear-gradient(135deg, #2E8B57, #1D6B45);
+    transform: scale(1.05);
 }
 
-.product-table {
-    width: 100%;
-    border-collapse: collapse;
+/* Sign Out Button */
+.signout-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.signout-btn:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+}
+
+/* Table Container */
+.table-container {
     margin-top: 20px;
 }
 
-.product-table th, .product-table td {
+/* Admin Table */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.admin-table th,
+.admin-table td {
     border-bottom: 1px solid #ddd;
-    padding: 12px;
+    padding: 14px;
     text-align: left;
 }
 
-.product-table th {
-    background: #f8f9fa;
-    font-weight: bold;
+.admin-table th {
+    background: #4CAF50;
+    color: white;
 }
 
-.product-table tr:nth-child(even) {
+.admin-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.product-table tr:hover {
-    background-color: #f1f1f1;
+.admin-table td:nth-child(5) { /* Targets the Image column */
+    width: 60px; /* Expands the column */
+    text-align: center; /* Centers the image */
+    vertical-align: middle; /* Ensures proper vertical alignment */
 }
 
+
+
+.admin-table tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Product Image */
 .product-image {
-    width: 60px;
-    height: auto;
-    border-radius: 8px;
+    width: 40px;  /* Slightly increased from 30px */
+    height: 40px; /* Slightly increased from 30px */
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: block;
+    margin: auto; /* Centers the image */
 }
 
+/* Action Buttons */
 .action-buttons {
     display: flex;
-    align-items: center;
     gap: 8px;
 }
 
-.edit-btn, .delete-btn {
+/* Edit & Delete Buttons */
+.edit-btn,
+.delete-btn {
     padding: 8px 14px;
     border: none;
     color: white;
     font-size: 14px;
-    border-radius: 5px;
+    font-weight: bold;
+    border-radius: 6px;
     cursor: pointer;
-    transition: 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .edit-btn {
-    background-color: #f39c12;
+    background: #f39c12;
 }
 
 .edit-btn:hover {
-    background-color: #e67e22;
+    background: #e67e22;
 }
 
 .delete-btn {
-    background-color: #e74c3c;
+    background: #e74c3c;
 }
 
 .delete-btn:hover {
-    background-color: #c0392b;
+    background: #c0392b;
+}
+
+/* Form Container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Add, Update, and Cancel Buttons */
+.add-btn {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34);
+}
+
+.update-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.update-btn:hover {
+    background: linear-gradient(135deg, #2980b9, #1e6091);
+}
+
+.cancel-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.cancel-btn:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .admin-container {
-        padding: 15px;
+        padding: 20px;
     }
 
     .admin-options {
@@ -110,13 +203,17 @@ h2 {
         align-items: center;
     }
 
-    .product-table th, .product-table td {
-        padding: 8px;
+    .admin-table th, .admin-table td {
+        padding: 10px;
         font-size: 14px;
     }
 
     .product-image {
-        width: 40px;
+        width: 40px; 
+        height: 40px; 
+        object-fit: cover;
+        border-radius: 4px; 
+        border: 1px solid #ddd;
     }
 
     .edit-btn, .delete-btn {

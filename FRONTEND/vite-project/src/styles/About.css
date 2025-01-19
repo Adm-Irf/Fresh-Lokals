@@ -79,39 +79,95 @@
     margin-bottom: 10px;
 }
 
-/* Mission & Offerings */
-.mission,
-.offerings,
-.contact {
-    margin-top: 40px;
+/* Featurette Section */
+.featurette-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 50px;
+    align-items: center;
 }
 
-.offerings ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.offerings li {
-    font-size: 1.2rem;
-    margin: 15px 0;
+/* Featurette Box */
+.featurette {
+    background: white;
+    padding: 40px;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featurette:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Featurette Text */
+.featurette h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ff6600;
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
-/* Icons Styling */
-.offerings li i {
-    font-size: 1.5rem;
-    color: #ff6600;
+/* Ensuring Consistent Featurette Height */
+.featurette p, .featurette ul {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+/* What We Offer List */
+.featurette ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.featurette ul li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.1rem;
 }
 
 /* Contact Section */
+.contact {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.contact a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact a:hover {
+    text-decoration: underline;
+}
+
+/* Ensure space between featurette and map */
+.featurette:last-child {
+    margin-bottom: 30px; /* Adjust spacing */
+}
+
+/* Add spacing above the Google Map */
 .contact iframe {
     width: 100%;
-    max-width: 600px;
+    max-width: 900px;
     height: 400px;
-    margin-top: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 30px; /* This creates space */
+    border-radius: 12px;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.2);
 }
