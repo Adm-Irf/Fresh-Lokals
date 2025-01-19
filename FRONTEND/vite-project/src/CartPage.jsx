@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import React from "react";
+import PayPalButton from "./PayPalButton"; // ✅ Import PayPal Button
 import "./styles/CartPage.css";
 
 const CartPage = () => {
     const [cart, setCart] = useState([]);
     const navigate = useNavigate();
-    const hasRedirected = useRef(false); // ✅ Prevent multiple redirects
+    const hasRedirected = useRef(false);
 
     useEffect(() => {
         const user = localStorage.getItem("user");
 
         if (!user && !hasRedirected.current) {
-            hasRedirected.current = true; // ✅ Prevent future alerts
+            hasRedirected.current = true;
             alert("Please sign in first to view your cart!");
             navigate("/login");
             return;
@@ -35,12 +36,11 @@ const CartPage = () => {
                 .then((data) => setCart(data))
                 .catch((error) => {
                     console.error("Error fetching cart:", error);
-                    setCart([]); // ✅ Set empty cart if error occurs
+                    setCart([]);
                 });
         }
     }, [navigate]);
 
-    // ✅ Handle Remove Item from Cart
     const handleRemoveItem = async (productName) => {
         try {
             const response = await fetch("http://localhost:8080/removeFromCart", {
@@ -51,7 +51,7 @@ const CartPage = () => {
 
             if (response.ok) {
                 alert(`${productName} removed from cart!`);
-                setCart(cart.filter((item) => item.name !== productName)); // ✅ Update cart state
+                setCart(cart.filter((item) => item.name !== productName));
             } else {
                 alert("Failed to remove item.");
             }
@@ -60,7 +60,6 @@ const CartPage = () => {
         }
     };
 
-    // ✅ Calculate Total Price
     const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price) * parseInt(item.quantity), 0);
 
     return (
@@ -92,7 +91,7 @@ const CartPage = () => {
                                             src={`http://localhost:8080/${item.image}`}
                                             alt={item.name}
                                             className="cart-image"
-                                            onError={(e) => e.target.src = "fallback-image.png"} // ✅ Fallback image
+                                            onError={(e) => e.target.src = "fallback-image.png"}
                                         />
                                     </td>
                                     <td>{item.name}</td>
@@ -103,7 +102,15 @@ const CartPage = () => {
                             ))}
                         </tbody>
                     </table>
+
+                    {/* ✅ Display Total Price */}
                     <h3 style={{ textAlign: "right", marginTop: "20px" }}>Total: RM {totalPrice.toFixed(2)}</h3>
+
+                    {/* ✅ Add PayPal Button */}
+                    <div style={{ marginTop: "20px", textAlign: "center" }}>
+                        <h3>Proceed to Payment</h3>
+                        <PayPalButton totalAmount={totalPrice} />
+                    </div>
                 </>
             )}
         </div>

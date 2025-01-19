@@ -8,6 +8,7 @@ import Farmer from "./Farmer";
 import Shop from "./Shop";
 import Login from "./Login";
 import CartPage from "./CartPage";
+import OrderSuccess from "./OrderSuccess"; 
 
 function Layout() {
     const location = useLocation();
@@ -24,6 +25,7 @@ function Layout() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/order-success" element={<OrderSuccess />} />
             </Routes>
             {!hideNavFooter && <Footer />}
         </>

@@ -91,6 +91,7 @@ public class App {
         server.createContext("/addToCart", ProductHandler::handleAddToCart);
 
         server.createContext("/checkout", new PaymentHandler());
+        
 
         // Serve static images
         server.createContext("/images", exchange -> {
