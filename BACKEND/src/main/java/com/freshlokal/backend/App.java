@@ -34,7 +34,10 @@ public class App {
         });
         
         server.createContext("/userCart", new CartHandler());
-
+        server.createContext("/removeFromCart", exchange -> {
+            addCorsHeaders(exchange);  // ✅ Add CORS headers
+            ProductHandler.handleDeleteFromCart(exchange);
+        });        
         server.createContext("/login", new AuthHandler());
         server.createContext("/signup", new SignupHandler());
         server.createContext("/currentUser", exchange -> {
@@ -77,8 +80,8 @@ public class App {
         });
         
         server.createContext("/itemTotalPrice", ProductHandler::handleGetItemTotalPrice);
+        server.createContext("/admin/uploadProduct", new AdminHandler()); // ✅ Corrected
 
-        // Register endpoints
         System.out.println("Registering /products endpoint...");
         server.createContext("/products", ProductHandler::handleGetProducts);
         server.createContext("/deleteFromCart", ProductHandler::handleDeleteFromCart);
@@ -111,8 +114,11 @@ public class App {
     
     // ✅ Function to add CORS headers
     private static void addCorsHeaders(HttpExchange exchange) {
-        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        if (!exchange.getResponseHeaders().containsKey("Access-Control-Allow-Origin")) {
+            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*"); 
+            exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+            exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        }
     }
+    
 }

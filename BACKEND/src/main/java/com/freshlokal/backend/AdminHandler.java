@@ -26,7 +26,8 @@ public class AdminHandler implements HttpHandler {
             sendResponse(exchange, 403, "{\"message\": \"Access denied. Admin only.\"}");
             return;
         }
-
+        
+    
         String path = exchange.getRequestURI().getPath();
         System.out.println("Admin Request Path: " + path);
 
@@ -58,18 +59,19 @@ public class AdminHandler implements HttpHandler {
         BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
         String requestBody = reader.readLine();
         reader.close();
-
+    
         System.out.println("Admin Adding Product: " + requestBody);
-
-        String[] newProduct = requestBody.split(",", 4);
-        if (newProduct.length != 4) {
-            sendResponse(exchange, 400, "{\"message\": \"Invalid product format.\"}");
+    
+        String[] newProduct = requestBody.split(",", 5);  // ✅ Update to 5 fields (including image)
+        if (newProduct.length != 5) {
+            sendResponse(exchange, 400, "{\"message\": \"Invalid product format. Expected: category,name,price,description,imagePath\"}");
             return;
         }
-
+    
         CSVUtils.appendToCSV(newProduct);
         sendResponse(exchange, 200, "{\"message\": \"Product added successfully!\"}");
     }
+    
 
     private void handleDeleteProduct(HttpExchange exchange) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
@@ -96,6 +98,11 @@ public class AdminHandler implements HttpHandler {
             sendResponse(exchange, 404, "{\"message\": \"User not found!\"}");
         }
     }
+
+    private static final String UPLOAD_DIR = "C:/Users/Irfan/OneDrive/Desktop/FRESHLOKAL/uploads/";
+
+     
+
 
     private void handleUpdateProduct(HttpExchange exchange) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));

@@ -1,1 +1,10 @@
+com\freshlokal\backend\AuthHandler.class
+com\freshlokal\backend\TPriceHandler.class
+com\freshlokal\backend\CartHandler.class
+com\freshlokal\backend\AdminHandler.class
 com\freshlokal\backend\App.class
+com\freshlokal\backend\SignupHandler.class
+com\freshlokal\backend\PaymentHandler.class
+com\freshlokal\backend\ProductHandler.class
+com\freshlokal\backend\CSVUtils.class
+com\freshlokal\backend\MultipartParser.class

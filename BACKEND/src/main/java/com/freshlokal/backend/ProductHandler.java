@@ -14,6 +14,13 @@ public class ProductHandler {
         // Endpoint to fetch products
         server.createContext("/products", ProductHandler::handleGetProducts);
     }
+
+    private static void addCorsHeaders(HttpExchange exchange) {
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+    
     
     public static void handleGetProducts(HttpExchange exchange) throws IOException {
         System.out.println("GET /products called");
@@ -134,58 +141,45 @@ public class ProductHandler {
     }
 
     public static void handleDeleteFromCart(HttpExchange exchange) throws IOException {
-        if ("DELETE".equals(exchange.getRequestMethod())) {
-            // ✅ Add CORS headers to allow frontend requests
-            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "DELETE, OPTIONS");
-            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
-            exchange.getResponseHeaders().add("Content-Type", "application/json");
-    
-            System.out.println("DELETE request received for cart");
-    
-            String currentUser = CSVUtils.getCurrentUser();
-            if (currentUser == null || currentUser.isEmpty()) {
-                String response = "{\"message\": \"User not logged in. Please sign in first.\"}";
-                exchange.sendResponseHeaders(401, response.getBytes().length);
-                try (OutputStream os = exchange.getResponseBody()) {
-                    os.write(response.getBytes());
-                }
-                return;
-            }
-    
-            // Read request body
-            BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
-            String productName = reader.readLine();
-            reader.close();
-    
-            System.out.println("Deleting from cart: " + productName);
-    
-            // User's cart file
-            String userCartFile = "Database/" + currentUser + "_cart.csv";
-    
-            boolean deleted = CSVUtils.deleteFromCart(userCartFile, productName);
-            if (deleted) {
-                String response = "{\"message\": \"Item removed from cart successfully!\"}";
-                exchange.sendResponseHeaders(200, response.getBytes().length);
-                try (OutputStream os = exchange.getResponseBody()) {
-                    os.write(response.getBytes());
-                }
-            } else {
-                String response = "{\"message\": \"Item not found in cart.\"}";
-                exchange.sendResponseHeaders(404, response.getBytes().length);
-                try (OutputStream os = exchange.getResponseBody()) {
-                    os.write(response.getBytes());
-                }
-            }
-        } else if ("OPTIONS".equals(exchange.getRequestMethod())) { // ✅ Handle preflight request
-            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "DELETE, OPTIONS");
-            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
-            exchange.sendResponseHeaders(204, -1); // No content for preflight request
-        } else {
-            exchange.sendResponseHeaders(405, -1); // Method not allowed
-        }
+    // ✅ Handle Preflight Request
+    if ("OPTIONS".equalsIgnoreCase(exchange.getRequestMethod())) {
+        addCorsHeaders(exchange);
+        exchange.sendResponseHeaders(204, -1); // ✅ No content response for preflight
+        return;
     }
+
+    if ("DELETE".equalsIgnoreCase(exchange.getRequestMethod())) {
+        addCorsHeaders(exchange);  // ✅ Ensure CORS headers are applied
+
+        System.out.println("DELETE request received for cart");
+
+        String currentUser = CSVUtils.getCurrentUser();
+        if (currentUser == null || currentUser.isEmpty()) {
+            sendResponse(exchange, 401, "{\"message\": \"User not logged in. Please sign in first.\"}");
+            return;
+        }
+
+        // Read request body
+        BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
+        String productName = reader.readLine();
+        reader.close();
+
+        System.out.println("Deleting from cart: " + productName);
+
+        // User's cart file
+        String userCartFile = "Database/" + currentUser + "_cart.csv";
+
+        boolean deleted = CSVUtils.deleteFromCart(userCartFile, productName);
+        if (deleted) {
+            sendResponse(exchange, 200, "{\"message\": \"Item removed from cart successfully!\"}");
+        } else {
+            sendResponse(exchange, 404, "{\"message\": \"Item not found in cart.\"}");
+        }
+    } else {
+        exchange.sendResponseHeaders(405, -1); // Method not allowed
+    }
+}
+
     
     
     public static void handleGetItemTotalPrice(HttpExchange exchange) throws IOException {

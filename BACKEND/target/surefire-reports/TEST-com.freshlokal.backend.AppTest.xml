@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.freshlokal.backend.AppTest" time="0.024" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.freshlokal.backend.AppTest" time="0.021" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Irfan\OneDrive\Desktop\FRESHLOKAL\BACKEND\target\test-classes;C:\Users\Irfan\OneDrive\Desktop\FRESHLOKAL\BACKEND\target\classes;C:\Users\Irfan\.m2\repository\com\google\code\gson\gson\2.8.9\gson-2.8.9.jar;C:\Users\Irfan\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;"/>
+    <property name="java.class.path" value="C:\Users\Irfan\OneDrive\Desktop\FRESHLOKAL\BACKEND\target\test-classes;C:\Users\Irfan\OneDrive\Desktop\FRESHLOKAL\BACKEND\target\classes;C:\Users\Irfan\.m2\repository\com\google\code\gson\gson\2.8.9\gson-2.8.9.jar;C:\Users\Irfan\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\Irfan\.m2\repository\jakarta\servlet\jakarta.servlet-api\5.0.0\jakarta.servlet-api-5.0.0.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -12,13 +12,12 @@
     <property name="user.timezone" value="Asia/Kuala_Lumpur"/>
     <property name="os.name" value="Windows 11"/>
     <property name="java.vm.specification.version" value="23"/>
-    <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin"/>
-    <property name="sun.java.command" value="C:\Users\Irfan\AppData\Local\Temp\surefire7701787196095175937\surefirebooter-20250114100234402_3.jar C:\Users\Irfan\AppData\Local\Temp\surefire7701787196095175937 2025-01-14T10-02-34_324-jvmRun1 surefire-20250114100234402_1tmp surefire_0-20250114100234402_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Irfan\AppData\Local\Temp\surefire14550391597727440594\surefirebooter-20250119164953763_3.jar C:\Users\Irfan\AppData\Local\Temp\surefire14550391597727440594 2025-01-19T16-49-53_689-jvmRun1 surefire-20250119164953763_1tmp surefire_0-20250119164953763_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="com.freshlokal.backend.AppTest"/>
-    <property name="surefire.test.class.path" value="C:\Users\Irfan\OneDrive\Desktop\FRESHLOKAL\BACKEND\target\test-classes;C:\Users\Irfan\OneDrive\Desktop\FRESHLOKAL\BACKEND\target\classes;C:\Users\Irfan\.m2\repository\com\google\code\gson\gson\2.8.9\gson-2.8.9.jar;C:\Users\Irfan\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\Irfan\OneDrive\Desktop\FRESHLOKAL\BACKEND\target\test-classes;C:\Users\Irfan\OneDrive\Desktop\FRESHLOKAL\BACKEND\target\classes;C:\Users\Irfan\.m2\repository\com\google\code\gson\gson\2.8.9\gson-2.8.9.jar;C:\Users\Irfan\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\Irfan\.m2\repository\jakarta\servlet\jakarta.servlet-api\5.0.0\jakarta.servlet-api-5.0.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Irfan"/>
     <property name="user.language" value="en"/>
@@ -31,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Irfan\AppData\Local\Temp\surefire7701787196095175937\surefirebooter-20250114100234402_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Irfan\AppData\Local\Temp\surefire14550391597727440594\surefirebooter-20250119164953763_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="23.0.1+11-39"/>
@@ -42,7 +41,6 @@
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="maven.ext.class.path" value="C:\Users\Irfan\.vscode\extensions\oracle.oracle-java-23.0.1\nbcode\java\maven-nblib\netbeans-eventspy.jar"/>
     <property name="localRepository" value="C:\Users\Irfan\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\Irfan\AppData\Local\Temp\"/>
@@ -60,5 +58,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testApp" classname="com.freshlokal.backend.AppTest" time="0.002"/>
+  <testcase name="testApp" classname="com.freshlokal.backend.AppTest" time="0.001"/>
 </testsuite>
