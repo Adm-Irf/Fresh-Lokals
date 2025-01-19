@@ -1,7 +1,32 @@
-Dairy,Fresh Milk Yum,10,Organic milk with extra vitamins.,images/FreshMilk.jpeg
-Meat,Fresh Chicken Breast,15,Chicken breast is a lean cut of meat.,images/FreshChickenBreast.jpg
-Seafood,Fresh Salmon,25,Salmon is a rich flavorful fish.,images/FreshSalmon.jpeg
-Bakery,Fresh Baguette,4,A baguette is a long crusty French bread .,images/FreshBaguette.jpeg
-Frozen,Frozen Mixed Vegetables,10,Frozen mixed vegetables.,images/FrozenMixedVegetables.jpeg
-Pantry,Cooking Oil,12,Cooking oil is a kitchen essential.,images/CookingOil.png
-Snacks,Potato Chips,3,Potato chips are thinly sliced fried potatoes.,images/PotatoChips.jpeg
+Meat,Free-Range Chicken,18,Free-range chicken (Ayam Kampung) is known for its rich flavor and firm texture.,images/ayam.webp
+Meat,Beef Tenderloin,45,Beef tenderloin (Daging Batang Pinang) is a premium cut used for rendang and grilling.,images/tenderloin.png
+Meat,Chicken Feet,6,Chicken feet (Kaki Ayam) are commonly used in soups and dim sum.,images/feet.png
+Meat,Chicken Liver,4,Chicken liver (Hati Ayam) is commonly used in curries and stir-fries.,images/hati.webp
+Meat,Minced Beef,20,Minced beef (Daging Kisar) is a versatile ingredient for meatballs and sambal.,images/minced.webp
+Seafood,Indian Mackerel,10,Indian mackerel (Ikan Kembung) is commonly used in asam pedas and fried fish dishes.,images/kembung.jpg
+Seafood,Giant Freshwater Prawns,38,Giant freshwater prawns (Udang Galah) are a delicacy in Malaysian seafood cuisine.,images/Udang.jpeg
+Seafood,Spanish Mackerel,35,Spanish mackerel (Ikan Tenggiri) is perfect for fish curry and fish paste.,images/tenggiri.webp
+Vegetables,Bird’s Eye Chili,8,Bird’s eye chili (Cili Padi) is a key ingredient in spicy sambal sauces.,images/cili.png
+Vegetables,Vietnamese Coriander,3,Vietnamese coriander (Daun Kesum) is used in laksa and spicy soups.,images/kesum.png
+Vegetables,Long Beans,5,Long beans (Kacang Panjang) are a staple in stir-fried dishes and curries.,images/kacang.png
+Vegetables,Purple Eggplant,4,Purple eggplant (Terung Ungu) is commonly used in sambal terung.,images/terung.png
+Vegetables,Cassava Leaves,3,Cassava leaves (Pucuk Ubi) are cooked in coconut milk or stir-fried.,images/pucuk.png
+Vegetables,Garlic,6,Garlic (Bawang Putih) is a staple ingredient in Malaysian and Asian cuisine.,images/garlic.jpg
+Pantry,Turmeric Powder,3,Turmeric powder (Serbuk Kunyit) enhances the color and flavor of dishes.,images/kunyit.jpg
+Pantry,Tamarind Paste,7,Tamarind paste (Asam Jawa) adds a sour taste to curries and sambal.,images/asamjawa.jpg
+Pantry,Shrimp Paste,3,Shrimp paste (Belacan) is essential in sambal and other Malaysian dishes.,images/belacan.png
+Pantry,Lemongrass,2,Lemongrass (Serai) is a fragrant herb used in curries and soups.,images/serai.png
+Pantry,Toasted Grated Coconut,4,Toasted grated coconut (Kerisik) is used in rendang and coconut-based dishes.,images/kerisik.jpeg
+Pantry,Torch Ginger,6,Torch ginger (Bunga Kantan) adds fragrance to laksa and fish dishes.,images/kantan.jpg
+Pantry,Dried Cuttlefish,15,Dried cuttlefish (Sotong Kering) is used in stir-fries and as a snack.,images/sotongkering.jpeg
+Dry Goods,Tapioca Starch,6,Tapioca starch (Kanji Ubi Kayu) is used in desserts and thickening sauces.,images/tapioca.webp
+Dry Goods,Fragrant Rice,25,Fragrant rice (Beras Wangi) is commonly used in nasi lemak and biryani.,images/rice.jpeg
+Dry Goods,Yellow Noodles,4,Yellow noodles (Mi Kuning) are used in fried noodles and curry laksa.,images/mikuning.jpg
+Dry Goods,Rice Flour,6,Rice flour (Tepung Beras) is used in making traditional Malaysian cakes.,images/tepungb.jpg
+Dry Goods,Palm Sugar,7,Palm sugar (Gula Melaka) is used in traditional desserts and sweet dishes.,images/gulamelaka.jpeg
+Dry Goods,Sweet Soy Sauce,8,Sweet soy sauce (Kicap Manis) is used in stir-fried dishes and marinades.,images/kicap.webp
+Spices,Black Pepper,5,Black pepper (Lada Hitam) is a key spice in meat dishes and marinades.,images/lada.png
+Spices,Cardamom,7,Cardamom (Buah Pelaga) is commonly used in biryani and spice blends.,images/pelaga.jpg
+Spices,Star Anise,6,Star anise (Bunga Lawang) adds depth and aroma to curries and soups.,images/lawang.png
+Pantry,Fermented Soybean Paste,7,Fermented soybean paste (Taucu) is commonly used in Chinese-Malay dishes.,images/taucu.jpg
+Spices,Candlenuts,5,Candlenuts (Buah Keras) are used as a thickening agent in curries and stews.,images/keras.webp
