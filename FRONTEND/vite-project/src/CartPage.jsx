@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import React from "react";
+import "./styles/CartPage.css";
 
 const CartPage = () => {
     const [cart, setCart] = useState([]);
     const navigate = useNavigate();
-    const hasRedirected = useRef(false); // ✅ useRef instead of useState
+    const hasRedirected = useRef(false); // ✅ Prevent multiple redirects
 
     useEffect(() => {
         const user = localStorage.getItem("user");
@@ -33,10 +35,33 @@ const CartPage = () => {
                 .then((data) => setCart(data))
                 .catch((error) => {
                     console.error("Error fetching cart:", error);
-                    setCart([]);
+                    setCart([]); // ✅ Set empty cart if error occurs
                 });
         }
-    }, [navigate]); // ✅ Removed unnecessary dependencies
+    }, [navigate]); 
+
+    // ✅ Handle Remove Item from Cart
+    const handleRemoveItem = async (productName) => {
+        try {
+            const response = await fetch("http://localhost:8080/removeFromCart", {
+                method: "DELETE",
+                headers: { 
+                    "Content-Type": "text/plain"
+                },
+                body: productName
+            });
+    
+            if (response.ok) {
+                alert(`${productName} removed from cart!`);
+                setCart(cart.filter((item) => item.name !== productName)); // ✅ Update cart state
+            } else {
+                alert("Failed to remove item.");
+            }
+        } catch (error) {
+            console.error("Error removing item:", error);
+        }
+    };
+    
 
     return (
         <div>

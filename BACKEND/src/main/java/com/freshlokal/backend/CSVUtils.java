@@ -232,12 +232,19 @@ public class CSVUtils {
     public static void appendToCSV(String[] newRow) {
         try (FileWriter fw = new FileWriter(CSV_FILE_PATH, true);
              BufferedWriter bw = new BufferedWriter(fw)) {
+            if (newRow.length != 5) {
+                System.out.println("❌ Error: Invalid product format!");
+                return;
+            }
             bw.write(String.join(",", newRow));
             bw.newLine();
+            System.out.println("✅ Product added: " + String.join(",", newRow));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
+    
     // New method specifically for User1cart.csv
     public static void appendToCart(String[] newRow, String filePath) {
         try (FileWriter fw = new FileWriter(filePath, true);
@@ -250,14 +257,34 @@ public class CSVUtils {
     }
 
     public static void appendToUserCart(String[] newRow, String userCartFile) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(userCartFile, true))) {
-            bw.write(String.join(",", newRow));
-            bw.newLine();
-            System.out.println("Added to " + userCartFile + ": " + String.join(",", newRow));
+        List<String[]> cartItems = readCartCSV(userCartFile);
+        boolean itemExists = false;
+    
+        for (String[] item : cartItems) {
+            if (item[1].equalsIgnoreCase(newRow[1])) { // Check if item name matches
+                int existingQuantity = Integer.parseInt(item[5]); // Get current quantity
+                int newQuantity = existingQuantity + Integer.parseInt(newRow[5]); // Add new quantity
+                item[5] = String.valueOf(newQuantity); // Update quantity
+                itemExists = true;
+                break;
+            }
+        }
+    
+        if (!itemExists) {
+            cartItems.add(newRow); // Add new item if not found
+        }
+    
+        // Write the updated cart back to the file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(userCartFile))) {
+            for (String[] item : cartItems) {
+                bw.write(String.join(",", item));
+                bw.newLine();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
     
 
     // Method to convert CSV data to JSON format

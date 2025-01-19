@@ -6,7 +6,13 @@ const AdminDashboard = () => {
     const [view, setView] = useState("products"); // Default view is products
     const [products, setProducts] = useState([]);
     const [users, setUsers] = useState([]);
-    const [newProduct, setNewProduct] = useState({ category: "", name: "", price: "", description: "" });
+    const [newProduct, setNewProduct] = useState({ 
+        category: "", 
+        name: "", 
+        price: "", 
+        description: "", 
+        image: ""  // ✅ Add Image Field
+    });
     const [editProduct, setEditProduct] = useState(null);
     const navigate = useNavigate();
 
@@ -125,19 +131,27 @@ const AdminDashboard = () => {
     };
 
     // ✅ Add Product
+    const handleFileChange = (event) => {
+        setNewProduct({ ...newProduct, imageFile: event.target.files[0] });
+    };
+    
     const handleAddProduct = async () => {
-        const productData = `${newProduct.category},${newProduct.name},${newProduct.price},${newProduct.description}`;
-
+        const formData = new FormData();
+        formData.append("category", newProduct.category);
+        formData.append("name", newProduct.name);
+        formData.append("price", newProduct.price);
+        formData.append("description", newProduct.description);
+        formData.append("image", newProduct.image); // ✅ Attach image file
+    
         try {
-            const response = await fetch("http://localhost:8080/admin/addProduct", {
+            const response = await fetch("http://localhost:8080/admin/uploadProduct", {
                 method: "POST",
-                headers: { "Content-Type": "text/plain" },
-                body: productData,
+                body: formData, // ✅ Send as multipart form data
             });
-
+    
             if (response.ok) {
                 alert("Product added successfully!");
-                setNewProduct({ category: "", name: "", price: "", description: "" });
+                setNewProduct({ category: "", name: "", price: "", description: "", image: null });
                 fetchProducts(); // Refresh product list
             } else {
                 alert("Failed to add product.");
@@ -145,7 +159,10 @@ const AdminDashboard = () => {
         } catch (error) {
             console.error("Error adding product:", error);
         }
-    };
+    };    
+    
+    // ✅ Add file input field in the form
+    <input type="file" accept="image/*" onChange={handleFileChange} />
 
     // ✅ Update Product
     const handleUpdateProduct = async () => {
@@ -249,13 +266,26 @@ const AdminDashboard = () => {
 
                     {/* ✅ Add Product */}
                     <h3>Add Product</h3>
-                    <div className="add-product-form">
-                        <input type="text" placeholder="Category" value={newProduct.category} onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })} />
-                        <input type="text" placeholder="Name" value={newProduct.name} onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} />
-                        <input type="number" placeholder="Price" value={newProduct.price} onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} />
-                        <input type="text" placeholder="Description" value={newProduct.description} onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} />
-                        <button onClick={handleAddProduct}>➕ Add Product</button>
-                    </div>
+                        <div className="add-product-form">
+                            <input type="text" placeholder="Category" value={newProduct.category} 
+                                onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })} 
+                            />
+                            <input type="text" placeholder="Name" value={newProduct.name} 
+                                onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} 
+                            />
+                            <input type="number" placeholder="Price" value={newProduct.price} 
+                                onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} 
+                            />
+                            <input type="text" placeholder="Description" value={newProduct.description} 
+                                onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} 
+                            />
+                            
+                            {/* ✅ New Image Upload Input */}
+                            <input type="file" accept="image/*" onChange={(e) => setNewProduct({ ...newProduct, image: e.target.files[0] })} />
+
+                            <button onClick={handleAddProduct}>➕ Add Product</button>
+                        </div>
+
 
                     {/* ✅ Edit Product */}
                     {editProduct && (
