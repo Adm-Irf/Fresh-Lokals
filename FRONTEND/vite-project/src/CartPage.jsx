@@ -1,22 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-
-
 import React from "react";
-
 import "./styles/CartPage.css";
 
 const CartPage = () => {
     const [cart, setCart] = useState([]);
     const navigate = useNavigate();
-
     const hasRedirected = useRef(false); // ✅ Prevent multiple redirects
 
     useEffect(() => {
         const user = localStorage.getItem("user");
 
         if (!user && !hasRedirected.current) {
-            hasRedirected.current = true;
+            hasRedirected.current = true; // ✅ Prevent future alerts
             alert("Please sign in first to view your cart!");
             navigate("/login");
             return;
@@ -42,20 +38,17 @@ const CartPage = () => {
                     setCart([]); // ✅ Set empty cart if error occurs
                 });
         }
-
-    }, [navigate]); 
+    }, [navigate]);
 
     // ✅ Handle Remove Item from Cart
     const handleRemoveItem = async (productName) => {
         try {
             const response = await fetch("http://localhost:8080/removeFromCart", {
                 method: "DELETE",
-                headers: { 
-                    "Content-Type": "text/plain"
-                },
-                body: productName
+                headers: { "Content-Type": "text/plain" },
+                body: productName,
             });
-    
+
             if (response.ok) {
                 alert(`${productName} removed from cart!`);
                 setCart(cart.filter((item) => item.name !== productName)); // ✅ Update cart state
@@ -66,6 +59,9 @@ const CartPage = () => {
             console.error("Error removing item:", error);
         }
     };
+
+    // ✅ Calculate Total Price
+    const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price) * parseInt(item.quantity), 0);
 
     return (
         <div className="cart-container">
@@ -96,7 +92,7 @@ const CartPage = () => {
                                             src={`http://localhost:8080/${item.image}`}
                                             alt={item.name}
                                             className="cart-image"
-                                            onError={(e) => e.target.src = "fallback-image.png"}
+                                            onError={(e) => e.target.src = "fallback-image.png"} // ✅ Fallback image
                                         />
                                     </td>
                                     <td>{item.name}</td>
