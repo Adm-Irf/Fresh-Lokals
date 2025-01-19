@@ -37,30 +37,31 @@ const ProductModal = ({ product, onClose }) => {
 
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="close-button" onClick={onClose}>×</button>
-        {product.image && <img src={`http://localhost:8080/${product.image}`} alt={product.name} className="product-image" />}
-        <h2>{product.name}</h2>
-        <p>{product.category}</p>
-        <h3>RM {product.price}</h3>
-        <p>{product.description}</p>
+      <div className="modal-overlay">
+            <div className="modal-content">
+              <button className="close-button" onClick={onClose}>×</button>
+              {product.image && <img src={`http://localhost:8080/${product.image}`} alt={product.name} className="product-image" />}
+              <h2>{product.name}</h2>
+              <p>{product.category}</p>
+              <h3 className="product-price">RM {product.price}</h3>
+              <p>{product.description}</p>
 
-        <label>
-          Quantity:
-          <input 
-            type="number" 
-            value={quantity} 
-            min="1" 
-            onChange={(e) => setQuantity(e.target.value)} 
-          />
-        </label>
+              <div className="quantity-section">
+                <label>Quantity:</label>
+                <input 
+                  type="number" 
+                  className="quantity-input"
+                  value={quantity} 
+                  min="1" 
+                  onChange={(e) => setQuantity(e.target.value)} 
+                />
+              </div>
 
-        <button className="add-to-cart-button" onClick={handleAddToCart}>
-          Add to Cart
-        </button>
-      </div>
-    </div>
+              <button className="add-to-cart-button" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
+            </div>
+          </div>
   );
 };
 
