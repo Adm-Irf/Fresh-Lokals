@@ -8,8 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
 
 public class CSVUtils {
     private static final String CSV_FILE_PATH = "Database/Products.csv";
@@ -547,7 +551,11 @@ public class CSVUtils {
     
     public static void appendToPurchaseCSV(String[] newRow, String filePath) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
-            bw.write(String.join(",", newRow));
+            bw.write(String.join(",", Arrays.stream(newRow)
+        .map(value -> value.contains(",") ? "\"" + value + "\"" : value) // Wrap fields with commas in quotes
+        .toArray(String[]::new)
+));
+
             bw.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -561,5 +569,27 @@ public class CSVUtils {
             e.printStackTrace();
         }
     }
+
+    public static String convertToJsonWithTransaction(List<String[]> purchaseList) {
+        List<Map<String, String>> formattedPurchases = new ArrayList<>();
+        
+        for (String[] purchase : purchaseList) {
+            Map<String, String> purchaseData = new HashMap<>();
+            purchaseData.put("transactionId", purchase[0]);
+            purchaseData.put("category", purchase[1]);
+            purchaseData.put("name", purchase[2]);
+            purchaseData.put("price", purchase[3]);
+            purchaseData.put("description", purchase[4]);
+            purchaseData.put("image", purchase[5]);
+            purchaseData.put("quantity", purchase[6]);  // ✅ Fix: Ensure Quantity is included
+            
+            formattedPurchases.add(purchaseData);
+        }
+
+        Gson gson = new Gson();
+        return gson.toJson(formattedPurchases);
+    }
+
+
     
 }
