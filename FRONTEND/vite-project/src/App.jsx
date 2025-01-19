@@ -11,7 +11,7 @@ import CartPage from "./CartPage";
 
 function Layout() {
     const location = useLocation();
-    const hideNavFooter = location.pathname === "/admin";  // ✅ Hide for Admin
+    const hideNavFooter = location.pathname === "/admin";  
 
     return (
         <>

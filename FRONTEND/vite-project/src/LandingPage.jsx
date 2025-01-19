@@ -68,14 +68,14 @@ const LandingPage = () => {
 
       {/* Featurette: Join FreshLokals & Enjoy Freshness! */}
       <section className="featurette"> 
-        <img src={freshImg} alt="Fresh" className="featurette-image" />
         <div className="featurette-content">
           <h2 className="featurette-heading">Join FreshLokals & Enjoy Freshness!</h2>
           <p>
             Sign up today and enjoy <strong>kampung-style</strong> freshness with modern convenience.
           </p>
-          <Link to="/signup" className="cta-button">Sign Up Now</Link>
+          <Link to="/login" className="cta-button">Sign Up Now</Link>  
         </div>
+        <img src={freshImg} alt="Fresh" className="featurette-image" />
       </section>
     </div>
     </div>
