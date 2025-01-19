@@ -5,16 +5,12 @@ import "../styles/Navbar.css";
 const Navbar = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState(localStorage.getItem("user") || null);
-    const [isAdmin, setIsAdmin] = useState(!!localStorage.getItem("adminToken"));
 
-    // ✅ Listen for storage changes (Login & Logout)
     useEffect(() => {
         const handleStorageChange = () => {
             setUsername(localStorage.getItem("user") || null);
-            setIsAdmin(!!localStorage.getItem("adminToken"));
         };
 
-        // ✅ Listen for login/logout events
         window.addEventListener("userLoggedIn", handleStorageChange);
         window.addEventListener("storage", handleStorageChange);
 
@@ -24,18 +20,12 @@ const Navbar = () => {
         };
     }, []);
 
-    // ✅ Logout function
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to log out?")) {
-            localStorage.removeItem("user"); // ✅ Clear session
-            localStorage.removeItem("adminToken"); // ✅ Ensure admin session is cleared
-            setUsername(null); // ✅ Update UI immediately
-            setIsAdmin(false);
-
-            // ✅ Dispatch event so other components update immediately
+            localStorage.removeItem("user");
+            localStorage.removeItem("adminToken");
+            setUsername(null);
             window.dispatchEvent(new Event("storage"));
-
-            // ✅ Redirect to homepage
             navigate("/");
         }
     };
@@ -43,7 +33,6 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="left">
-                {/* ✅ Show username if logged in, otherwise show Sign In */}
                 {username ? (
                     <button className="username-button" onClick={handleLogout}>
                         {username} ▼
@@ -57,6 +46,7 @@ const Navbar = () => {
                 <Link to="/shop">Shop</Link>
                 <Link to="/farmer">Farmer</Link>
                 <Link to="/about">About</Link>  
+                {username && <Link to="/purchases">Purchases</Link>} {/* ✅ Add Purchases Button */}
                 <Link to="/cart">Cart</Link>
             </div>
         </nav>

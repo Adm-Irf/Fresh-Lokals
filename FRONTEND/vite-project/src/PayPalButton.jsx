@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 
-const PayPalButton = ({ totalAmount }) => {
+const PayPalButton = ({ totalAmount, cartItems }) => {
     useEffect(() => {
-        // ✅ Ensure PayPal script is only loaded once
         if (!window.paypal) {
             const script = document.createElement("script");
             script.src = "https://www.paypal.com/sdk/js?client-id=AatMVNu4Mn-wDXgZosvIwySg_HyCCgyZQwtRGG5LyrVzOkS0OjCIhBeDWdDvKcsnyYTB71K7Jb4B5Z0p&currency=MYR";
@@ -14,8 +13,8 @@ const PayPalButton = ({ totalAmount }) => {
                             purchase_units: [
                                 {
                                     amount: {
-                                        currency_code: "MYR", // ✅ Change currency to MYR
-                                        value: totalAmount.toFixed(2), // ✅ Use the correct cart total
+                                        currency_code: "MYR",
+                                        value: totalAmount.toFixed(2),
                                     },
                                 },
                             ],
@@ -24,9 +23,27 @@ const PayPalButton = ({ totalAmount }) => {
                     onApprove: async (data, actions) => {
                         const order = await actions.order.capture();
                         alert(`Payment Successful! Transaction ID: ${order.id}`);
-
-                        // ✅ Redirect to Order Confirmation Page
-                        window.location.href = "/order-success";
+                    
+                        try {
+                            const response = await fetch("http://localhost:8080/purchase", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                mode: "cors", // ✅ Force CORS
+                                body: JSON.stringify({ transactionId: order.id, cartItems }),
+                            });
+                    
+                            if (response.ok) {
+                                alert("Your purchase has been recorded!");
+                                window.location.href = "/order-success";
+                            } else {
+                                const errorText = await response.text();
+                                console.error("Purchase failed:", errorText);
+                                alert("Failed to save purchase. Please contact support.");
+                            }
+                        } catch (error) {
+                            console.error("Error saving purchase:", error);
+                            alert("Server error. Please try again later.");
+                        }
                     },
                     onError: (err) => {
                         console.error("PayPal Checkout Error:", err);
@@ -37,7 +54,7 @@ const PayPalButton = ({ totalAmount }) => {
 
             document.body.appendChild(script);
         }
-    }, [totalAmount]);
+    }, [totalAmount, cartItems]);
 
     return <div id="paypal-button-container"></div>;
 };

@@ -86,7 +86,7 @@ public class App {
         server.createContext("/products", ProductHandler::handleGetProducts);
         server.createContext("/deleteFromCart", ProductHandler::handleDeleteFromCart);
         server.createContext("/totalPrice", new TPriceHandler());
-
+        server.createContext("/purchase", new PurchaseHandler());
         System.out.println("Registering /addToCart endpoint...");
         server.createContext("/addToCart", ProductHandler::handleAddToCart);
 

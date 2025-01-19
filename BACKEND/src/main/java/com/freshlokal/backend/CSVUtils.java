@@ -544,5 +544,22 @@ public class CSVUtils {
         json.append("]");
         return json.toString();
     }
-       
+    
+    public static void appendToPurchaseCSV(String[] newRow, String filePath) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
+            bw.write(String.join(",", newRow));
+            bw.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void clearFile(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
+            writer.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

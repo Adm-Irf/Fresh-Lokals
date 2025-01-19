@@ -9,6 +9,7 @@ import Shop from "./Shop";
 import Login from "./Login";
 import CartPage from "./CartPage";
 import OrderSuccess from "./OrderSuccess"; 
+import PurchasesPage from "./PurchasePage"; // ✅ Import Purchases Page
 
 function Layout() {
     const location = useLocation();
@@ -21,11 +22,12 @@ function Layout() {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/farmer" element={<Farmer />} />
-                <Route path="/Shop" element={<Shop />} />
+                <Route path="/shop" element={<Shop />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/order-success" element={<OrderSuccess />} />
+                <Route path="/purchases" element={<PurchasesPage />} /> {/* ✅ Add Purchases Page Route */}
             </Routes>
             {!hideNavFooter && <Footer />}
         </>
