@@ -89,7 +89,7 @@ public class App {
         server.createContext("/purchase", new PurchaseHandler());
         System.out.println("Registering /addToCart endpoint...");
         server.createContext("/addToCart", ProductHandler::handleAddToCart);
-
+        server.createContext("/purchases", new PurchaseHandler());
         server.createContext("/checkout", new PaymentHandler());
         
 
