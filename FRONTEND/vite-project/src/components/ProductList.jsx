@@ -11,10 +11,31 @@ const ProductList = () => {
 
   useEffect(() => {
     fetch("http://localhost:8080/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error("Error fetching products:", error));
-  }, []);
+        .then((response) => {
+            if (!response.ok) {
+                if (response.status === 401) {
+                    console.warn("User not logged in. Showing products anyway.");
+                    return []; // ✅ Return empty array instead of undefined
+                }
+                throw new Error("Failed to fetch products");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (!Array.isArray(data)) {
+                console.error("Invalid products data received:", data);
+                setProducts([]); // ✅ Prevents crashes
+            } else {
+                setProducts(data);
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching products:", error);
+            setProducts([]); // ✅ Fallback to prevent crashes
+        });
+}, []);
+
+
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;

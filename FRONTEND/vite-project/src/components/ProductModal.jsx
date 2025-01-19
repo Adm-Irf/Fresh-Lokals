@@ -5,35 +5,36 @@ const ProductModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = async () => {
-    const user = localStorage.getItem("user"); // ✅ Ensure 'user' is retrieved correctly
+    const user = localStorage.getItem("user"); // ✅ Get logged-in user
 
     if (!user) {
-      alert("Please sign in first! Redirecting to login...");
-      window.location.href = "/login"; // Redirect to login page
-      return;
+        alert("Please sign in first! Redirecting to login...");
+        window.location.href = "/login"; // Redirect to login page
+        return;
     }
 
     const requestBody = `${product.name},${quantity}`;
 
     try {
-      const response = await fetch("http://localhost:8080/addToCart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain",
-        },
-        body: requestBody,
-      });
+        const response = await fetch("http://localhost:8080/addToCart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain",
+            },
+            body: requestBody,
+        });
 
-      if (response.ok) {
-        alert("Product added to cart successfully!");
-      } else {
-        alert("Failed to add product to cart. Please try again.");
-      }
+        if (response.ok) {
+            alert("Product added to cart successfully!");
+        } else {
+            alert("Failed to add product to cart. Please try again.");
+        }
     } catch (error) {
-      console.error("Error adding product to cart:", error);
-      alert("Server error. Please try again later.");
+        console.error("Error adding product to cart:", error);
+        alert("Server error. Please try again later.");
     }
-  };
+};
+
 
   return (
     <div className="modal-overlay">
