@@ -22,37 +22,27 @@ public class ProductHandler {
             exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
             exchange.getResponseHeaders().add("Content-Type", "application/json");
     
-            // ✅ Ensure user is signed in before viewing products
-            String currentUser = CSVUtils.getCurrentUser();
-            if (currentUser == null || currentUser.isEmpty()) {
-                String response = "{\"message\": \"User not logged in. Please sign in first.\"}";
-                exchange.sendResponseHeaders(401, response.getBytes().length);
-                try (OutputStream os = exchange.getResponseBody()) {
-                    os.write(response.getBytes());
-                }
-                return;
-            }
+            // ❌ REMOVE USER AUTHENTICATION CHECK
+            // String currentUser = CSVUtils.getCurrentUser();
+            // if (currentUser == null || currentUser.isEmpty()) {
+            //     sendResponse(exchange, 401, "{\"message\": \"User not logged in. Please sign in first.\"}");
+            //     return;
+            // }
     
-            // ✅ Load products from CSV
+            // ✅ Load products from CSV without requiring login
             List<String[]> products = CSVUtils.readCSV();
             if (products.isEmpty()) {
-                String response = "[]"; // Return empty array if no products
-                exchange.sendResponseHeaders(200, response.getBytes().length);
-                try (OutputStream os = exchange.getResponseBody()) {
-                    os.write(response.getBytes());
-                }
+                sendResponse(exchange, 200, "[]");
                 return;
             }
     
-            String jsonResponse = CSVUtils.convertProductsToJson(products); // ✅ Use correct function
-            exchange.sendResponseHeaders(200, jsonResponse.getBytes().length);
-            try (OutputStream os = exchange.getResponseBody()) {
-                os.write(jsonResponse.getBytes());
-            }
+            String jsonResponse = CSVUtils.convertProductsToJson(products);
+            sendResponse(exchange, 200, jsonResponse);
         } else {
-            exchange.sendResponseHeaders(405, -1); // Method not allowed
+            sendResponse(exchange, 405, "{\"message\": \"Method not allowed.\"}");
         }
-    }    
+    }
+        
     
     public static void handleAddToCart(HttpExchange exchange) throws IOException {
         if ("POST".equals(exchange.getRequestMethod())) {
