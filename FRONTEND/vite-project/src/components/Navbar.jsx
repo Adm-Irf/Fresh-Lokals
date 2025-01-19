@@ -46,7 +46,7 @@ const Navbar = () => {
                 {/* ✅ Show username if logged in, otherwise show Sign In */}
                 {username ? (
                     <button className="username-button" onClick={handleLogout}>
-                        {username} ▼
+                        {username} <span className="dropdown-arrow">▼</span>
                     </button>
                 ) : (
                     <Link to="/login" className="signin-button">Sign In</Link>

@@ -26,8 +26,8 @@
     top: 10px;
     right: 15px;
     font-size: 20px;
-    border: none;
-    background: none;
+    border:rgba(0, 0, 0, 0.5);
+    background: whitesmoke;
     cursor: pointer;
   }
   

@@ -107,7 +107,7 @@ const CartPage = () => {
                     <h3 style={{ textAlign: "right", marginTop: "20px" }}>Total: RM {totalPrice.toFixed(2)}</h3>
 
                     {/* ✅ Add PayPal Button */}
-                    <div style={{ marginTop: "20px", textAlign: "center" }}>
+                    <div className="payment-container">
                         <h3>Proceed to Payment</h3>
                         <PayPalButton totalAmount={totalPrice} />
                     </div>
