@@ -3,16 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
-    const [username, setUsername] = useState(localStorage.getItem("user") || null);
     const navigate = useNavigate();
+    const [username, setUsername] = useState(localStorage.getItem("user") || null);
+    const [isAdmin, setIsAdmin] = useState(!!localStorage.getItem("adminToken"));
 
-    // ✅ Update state when user logs in
+    // ✅ Listen for storage changes (Login & Logout)
     useEffect(() => {
         const handleStorageChange = () => {
             setUsername(localStorage.getItem("user") || null);
+            setIsAdmin(!!localStorage.getItem("adminToken"));
         };
 
-        // ✅ Listen for custom login event
+        // ✅ Listen for login/logout events
         window.addEventListener("userLoggedIn", handleStorageChange);
         window.addEventListener("storage", handleStorageChange);
 
@@ -26,8 +28,15 @@ const Navbar = () => {
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to log out?")) {
             localStorage.removeItem("user"); // ✅ Clear session
+            localStorage.removeItem("adminToken"); // ✅ Ensure admin session is cleared
             setUsername(null); // ✅ Update UI immediately
-            navigate("/"); // ✅ Redirect to homepage
+            setIsAdmin(false);
+
+            // ✅ Dispatch event so other components update immediately
+            window.dispatchEvent(new Event("storage"));
+
+            // ✅ Redirect to homepage
+            navigate("/");
         }
     };
 

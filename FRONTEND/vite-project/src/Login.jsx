@@ -13,7 +13,7 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         setError(null);
-
+    
         try {
             const response = await fetch("http://localhost:8080/login", {
                 method: "POST",
@@ -22,17 +22,22 @@ const Login = () => {
                 },
                 body: `${username},${password}`,
             });
-
+    
             const data = await response.json();
-
+    
             if (response.ok) {
                 alert(data.message);
                 localStorage.setItem("user", username);
-
+    
                 // ✅ Notify Navbar to update
                 window.dispatchEvent(new Event("userLoggedIn"));
-
-                navigate("/shop"); // ✅ Redirect to Shop after login
+    
+                // ✅ Redirect admin to AdminDashboard
+                if (username.toLowerCase() === "admin") {
+                    navigate("/admin");
+                } else {
+                    navigate("/shop");
+                }
             } else {
                 setError(data.message || "Invalid credentials.");
             }
@@ -40,7 +45,7 @@ const Login = () => {
             console.error("🚨 Server error:", err);
             setError("Server error. Please try again later.");
         }
-    };
+    };    
 
     // ✅ Handle Signup
     const handleSignup = async (e) => {
