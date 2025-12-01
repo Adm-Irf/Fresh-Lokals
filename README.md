@@ -1,11 +1,16 @@
-# FreshLokals – Malaysian Local Grocery Marketplace 🥬🇲🇾
+# FreshLokals – Malaysian Local Grocery Marketplace 
 
 ## 📌 Introduction
 FreshLokals is an e-commerce prototype built by a group of Year 2 Computer Science students.  
 It highlights Malaysian local grocery products through a simple and responsive interface.
 
-The project uses **Vite + React** for the frontend and **Java + CSV storage** for the backend.  
+The project uses **Vite + React** for the frontend and **Java** for the backend.  
 We also added **PayPal Sandbox integration** to show how an online payment works without using real money.
+
+**Deployment Note**❗❗❗
+Frontend-only deployment.
+Best viewed on laptop or tablet.
+Mobile layout not supported yet.
 
 ## ✨ Features
 - Clean and responsive UI built with React
@@ -13,8 +18,6 @@ We also added **PayPal Sandbox integration** to show how an online payment works
 - CSV-based product and order storage
 - PayPal Sandbox checkout demo
 - Simple and lightweight architecture
-
----
 
 ## 💳 PayPal Sandbox Integration
 This project uses PayPal Sandbox to simulate online payments.  
@@ -26,14 +29,10 @@ It walks through the full flow:
 
 This gives a realistic experience without using real money.
 
----
-
 ## 🌿 About the Project
 FreshLokals is designed to support Malaysian local sellers.  
 The platform gives users a simple way to browse items, add them to cart and simulate a full checkout flow.  
 The project structure is intentionally straightforward to make it easy for students to read and extend.
-
----
 
 ## Download & Installation Guide
 
