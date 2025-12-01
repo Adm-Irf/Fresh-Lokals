@@ -8,9 +8,9 @@ The project uses **Vite + React** for the frontend and **Java** for the backend.
 We also added **PayPal Sandbox integration** to show how an online payment works without using real money.
 
 **Deployment Note**❗❗❗
-Frontend-only deployment.
-Best viewed on laptop or tablet.
-Mobile layout not supported yet.
+- Frontend-only deployment.
+- Best viewed on laptop or tablet.
+- Mobile layout not supported yet.
 
 ## ✨ Features
 - Clean and responsive UI built with React
