@@ -109,5 +109,3 @@ npm run dev
 - Project works best with Node LTS, Java 17+ and Maven installed.
 
 If you have any questions or suggestions, feel free to reach out!
-
-## 🛒 Happy Shopping! ✨
