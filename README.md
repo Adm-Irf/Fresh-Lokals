@@ -1,31 +1,52 @@
-# FreshLokals - Malaysian Local Grocery Marketplace
+# FreshLokals – Malaysian Local Grocery Marketplace 🥬🇲🇾
 
-## Introduction
-Hai! We are Year 2 Computer Science students, and this is our **FreshLokals** e-commerce project! FreshLokals is an online marketplace dedicated to promoting Malaysian local grocery products. The platform is built using **Vite with React** for the frontend and uses **CSV files** for data storage with JAVA Backend.
+## 📌 Introduction
+FreshLokals is an e-commerce prototype built by a group of Year 2 Computer Science students.  
+It highlights Malaysian local grocery products through a simple and responsive interface.
 
-## Project Features
-- A user-friendly interface for browsing and purchasing local food and ingredients.
-- **Navbar, Landing Page, and PayPal integration** for seamless transactions.
-- Categories include fresh produce, pantry staples, and more.
-- CSV-based data storage for product listings and order management.
+The project uses **Vite + React** for the frontend and **Java + CSV storage** for the backend.  
+We also added **PayPal Sandbox integration** to show how an online payment works without using real money.
+
+## ✨ Features
+- Clean and responsive UI built with React
+- Local Malaysian grocery categories
+- CSV-based product and order storage
+- PayPal Sandbox checkout demo
+- Simple and lightweight architecture
 
 ---
 
-## About the Project
-FreshLokals aims to provide a convenient platform for users to support **local businesses** by purchasing fresh and authentic Malaysian ingredients. Our approach ensures an easy-to-use interface, smooth transactions, and reliable product listings. 
+## 💳 PayPal Sandbox Integration
+This project uses PayPal Sandbox to simulate online payments.  
+It walks through the full flow:
+1. Add items to cart  
+2. Proceed to checkout  
+3. Complete mock payment  
+4. Return status to the website  
+
+This gives a realistic experience without using real money.
+
+---
+
+## 🌿 About the Project
+FreshLokals is designed to support Malaysian local sellers.  
+The platform gives users a simple way to browse items, add them to cart and simulate a full checkout flow.  
+The project structure is intentionally straightforward to make it easy for students to read and extend.
+
+---
 
 ## Download & Installation Guide
 
-### Prerequisites
-Ensure you have the following installed on your system:
-- **Java 17+** (for backend)
-- **Maven** (for managing backend dependencies)
-- **Node.js** (LTS version recommended for frontend)
-- **Git** (for cloning the repository)
+## 🧰 Prerequisites
+Before running the project, make sure you have:
+- Java 17+
+- Maven
+- Node.js (LTS)
+- Git
 
 ---
 
-## Steps to Download
+## ⬇️ Installation
 
 1. Open your terminal and navigate to your desired directory.
 2. Clone the repository using:
@@ -83,13 +104,11 @@ npm run dev
 
 ---
 
-## Notes
-- Ensure **Java 17+**, **Maven**, and **Node.js (18+)** are installed.
-- The backend must be running before accessing the frontend.
-- API requests are made to `http://localhost:8080/`.
-
----
+## 📝 Notes
+- Start the backend before running the frontend.
+- API calls are made to: `http://localhost:8080/`
+- Project works best with Node LTS, Java 17+ and Maven installed.
 
 If you have any questions or suggestions, feel free to reach out!
 
-**Happy Shopping!** 🛒🇲🇾
+## 🛒 Happy Shopping! ✨
