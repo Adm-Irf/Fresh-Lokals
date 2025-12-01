@@ -27,7 +27,8 @@ function Layout() {
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/order-success" element={<OrderSuccess />} />
-                <Route path="/purchases" element={<PurchasesPage />} /> {/* ✅ Add Purchases Page Route */}
+                <Route path="/purchases" element={<PurchasesPage />} />
+                <Route path="*" element={<LandingPage />} />
             </Routes>
             {!hideNavFooter && <Footer />}
         </>
@@ -36,7 +37,7 @@ function Layout() {
 
 function App() {
     return (
-        <Router>
+        <Router basename="/FreshLokals">
             <Layout />
         </Router>
     );
