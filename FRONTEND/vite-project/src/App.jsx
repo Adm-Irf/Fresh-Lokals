@@ -20,6 +20,8 @@ function Layout() {
             {!hideNavFooter && <Navbar />}
             <Routes>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/home" element={<LandingPage />} />
+
                 <Route path="/about" element={<About />} />
                 <Route path="/farmer" element={<Farmer />} />
                 <Route path="/shop" element={<Shop />} />
