@@ -5,15 +5,12 @@ FreshLokals is an e-commerce prototype built by a group of Year 2 Computer Scien
 It highlights Malaysian local grocery products through a simple and responsive interface.
 
 ### 🔗 Access Via  
-👉 **Website:** https://adm-irf.github.io/Fresh-Lokals/  
+**Website:** https://adm-irf.github.io/Fresh-Lokals/
+- Frontend-only deployment.
+- Best viewed on laptop or tablet.
 
 The project uses **Vite + React** for the frontend and **Java** for the backend.  
 We also added **PayPal Sandbox integration** to show how an online payment works without using real money.
-
-**Deployment Note**❗❗❗
-- Frontend-only deployment.
-- Best viewed on laptop or tablet.
-- Mobile layout not supported yet.
 
 ## ✨ Features
 - Clean and responsive UI built with React
