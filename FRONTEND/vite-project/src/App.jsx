@@ -39,7 +39,7 @@ function Layout() {
 
 function App() {
     return (
-        <Router basename="/FreshLokals">
+        <Router basename="/Fresh-Lokals">
             <Layout />
         </Router>
     );
