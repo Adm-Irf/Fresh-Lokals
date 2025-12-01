@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AdminDashboard from "./AdminDashboard";
@@ -19,7 +19,7 @@ function Layout() {
         <>
             {!hideNavFooter && <Navbar />}
             <Routes>
-                <Route path="/" element={<LandingPage />} />
+                <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="/home" element={<LandingPage />} />
 
                 <Route path="/about" element={<About />} />
